@@ -12,7 +12,11 @@ class _SearchTextFieldState extends State<SearchTextField> {
 
   @override
   Widget build(BuildContext context) {
+    //final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return SizedBox(
+      width: screenWidth * 0.078,
       height: 40,
       child: TextField(
         controller: TextEditingController(),

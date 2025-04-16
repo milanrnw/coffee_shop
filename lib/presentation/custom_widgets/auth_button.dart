@@ -13,12 +13,13 @@ class AuthButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Center(
       child: ElevatedButton(
         style: ButtonStyle(
           fixedSize: WidgetStatePropertyAll(
-            Size(screenWidth, 48),
+            Size(screenWidth, screenHeight * 0.059),
           ),
           backgroundColor: const WidgetStatePropertyAll(
             Color(0XFFCACACA),

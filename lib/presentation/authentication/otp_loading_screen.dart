@@ -13,6 +13,7 @@ class OtpLoadingScreen extends StatefulWidget {
 }
 
 class _OtpLoadingScreenState extends State<OtpLoadingScreen> {
+
   @override
   void initState() {
     super.initState();
@@ -26,6 +27,8 @@ class _OtpLoadingScreenState extends State<OtpLoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: const Color(0XFFFEFEFE),
       body: Center(
@@ -37,7 +40,7 @@ class _OtpLoadingScreenState extends State<OtpLoadingScreen> {
               'assets/images/coffee_loading.gif',
               scale: 0.5,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: screenHeight * 0.01),
             const Text(
               'Please wait a minute',
               style: TextStyle(

@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 4, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
     homeCarouselController = CarouselController(initialItem: carouselIndex);
     //_incrementCounter();
   }
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   const Expanded(
                     child: SearchTextField(),
                   ),
-                  const SizedBox(width: 20),
+                  SizedBox(width: screenWidth * 0.053),
                   IconButton(
                     onPressed: () {},
                     icon: const Icon(
@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   )
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: screenHeight * 0.02),
               // SizedBox(
               //   height: screenHeight * 0.168,
               //   width: screenWidth,
@@ -105,11 +105,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               //         .toList(),
               //   ),
               // ),
-
               CarouselSlider(
                 items: carouselImages
                     .map(
-                      (Image) => HomeCarouselItem(imageUrl: Image),
+                      (ourImages) => HomeCarouselItem(imageUrl: ourImages),
                     )
                     .toList(),
                 options: CarouselOptions(
@@ -117,7 +116,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   autoPlay: true,
                 ),
               ),
-              const SizedBox(height: 16),
+
+              SizedBox(height: screenHeight * 0.02),
               TabBar(
                 labelStyle: const TextStyle(
                   fontSize: 16,
@@ -133,9 +133,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   Tab(text: 'Coffee'),
                   Tab(text: 'Non Coffee'),
                   Tab(text: 'Pastry'),
-                  Tab(text: 'tab 4'),
                 ],
               ),
+
               Flexible(
                 child: TabBarView(
                   //physics: const NeverScrollableScrollPhysics(),
@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   children: [
                     Column(
                       children: [
-                        const SizedBox(height: 8),
+                        SizedBox(height: screenHeight * 0.01),
                         SizedBox(
                           height: screenHeight * 0.0517,
                           child: ListView.builder(
@@ -156,13 +156,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 6),
-                        const ProductTile(),
+                        SizedBox(height: screenHeight * 0.007),
+                        const ProductTile(
+                          productDescription: String.fromEnvironment('hi'),
+                        ),
                       ],
                     ),
-                    const Text('Hello from tab 2'),
-                    const Text('Hello from tab 3'),
-                    const Text('Hello from tab 4'),
+                    //causing error
+                    //const SizedBox(height: 6),
+                    // SizedBox(
+                    //   height: screenHeight * 0.455,
+                    //   child: ListView.builder(
+                    //     shrinkWrap: true,
+                    //     itemCount: 2,
+                    //     itemBuilder: (context, index) {
+                    //       return ProductTile(productDescription: 'hello');
+                    //     },
+                    //   ),
+                    // ),
+                    const Text('2'),
+                    const Text('3'),
                   ],
                 ),
               ),
