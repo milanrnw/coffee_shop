@@ -1,10 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:coffee_shop/constants/app_strings.dart';
+import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:coffee_shop/model/pills_model.dart';
+import 'package:coffee_shop/model/product_items_model.dart';
 import 'package:coffee_shop/presentation/custom_widgets/home_carousel_item.dart';
 import 'package:coffee_shop/presentation/custom_widgets/pills.dart';
 import 'package:coffee_shop/presentation/custom_widgets/product_tile.dart';
-import 'package:coffee_shop/presentation/custom_widgets/search_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:coffee_shop/presentation/home/search_bar.dart' as sb;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,30 +23,31 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   double scrollOffset = 0;
   late CarouselController homeCarouselController;
   late TabController tabController;
+  
+  final productItemData = [
+    ProductItemsModel(
+        productImage: "assets/images/home/products/item_1.png",
+        productLabel: "Coffee Milk",
+        productDescription: "ice americano + fresh milk",
+        productPrice: 25.000),
+    ProductItemsModel(
+        productImage: "assets/images/home/products/item_2.png",
+        productLabel: "Cocoa Caramel Latte",
+        productDescription: "streamed milk with mocha and caramel sauces",
+        productPrice: 35.500),
+    ProductItemsModel(
+        productImage: "assets/images/home/products/item_1.png",
+        productLabel: "Nitro Cold Brew",
+        productDescription: "cold brew with nitrogen without sugar, velvety crema.",
+        productPrice: 31.000),
+  ];
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 3, vsync: this);
     homeCarouselController = CarouselController(initialItem: carouselIndex);
-    //_incrementCounter();
   }
-
-  // _incrementCounter() {
-  //   Timer.periodic(const Duration(seconds: 3), (val) {
-  //     if (carouselIndex < 2) {
-  //       scrollOffset = scrollOffset + 400;
-  //       homeCarouselController.jumpTo(scrollOffset);
-
-  //       carouselIndex++;
-  //     } else if (carouselIndex == 2) {
-  //       carouselIndex = 0;
-  //       scrollOffset = 0;
-  //       homeCarouselController.jumpTo(scrollOffset);
-  //     }
-  //     setState(() {});
-  //   });
-  // }
 
   List<String> carouselImages = [
     'assets/images/home/carousel/carousel1.png',
@@ -56,9 +62,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     PillsModel(icon: Icons.discount, text: 'Promo'),
   ];
 
+  final productitemcontroller = PageController();
+
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
+    //final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -72,70 +80,41 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const Expanded(
-                    child: SearchTextField(),
-                  ),
-                  SizedBox(width: screenWidth * 0.053),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.notifications_outlined,
-                      color: Color(0XFF5D4037),
-                      size: 24,
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: screenHeight * 0.02),
-              // SizedBox(
-              //   height: screenHeight * 0.168,
-              //   width: screenWidth,
-              //   child: CarouselView(
-              //     controller: homeCarouselController,
-              //     scrollDirection: Axis.horizontal,
-              //     itemSnapping: true,
-              //     itemExtent: screenWidth,
-              //     children: carouselImages
-              //         .map(
-              //           (image) => HomeCarouselItem(imageUrl: image),
-              //         )
-              //         .toList(),
-              //   ),
-              // ),
-              CarouselSlider(
-                items: carouselImages
-                    .map(
-                      (ourImages) => HomeCarouselItem(imageUrl: ourImages),
-                    )
-                    .toList(),
-                options: CarouselOptions(
-                  height: screenHeight * 0.168,
-                  autoPlay: true,
-                ),
-              ),
 
-              SizedBox(height: screenHeight * 0.02),
+              sb.SearchBar(),
+              SizedBox(height: 8.h),
+              CarouselSlider(
+              options: CarouselOptions(
+              height: 137.h,
+              pageSnapping: true,
+              viewportFraction: 1,
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 4),),
+              items: carouselImages.map((image) {
+              return Builder(
+              builder: (BuildContext context) {
+              return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+              child: HomeCarouselItem(imageUrl: image),
+            );
+          },
+        );
+      }).toList(),
+    ),
+              SizedBox(height: 16.h),
               TabBar(
-                labelStyle: const TextStyle(
-                  fontSize: 16,
-                  color: Color(0XFF5D4037),
-                  fontWeight: FontWeight.w500,
-                ),
+                labelStyle: AppTextStyles.homeScreenTab,
                 indicatorColor: const Color(0XFF5D4037),
                 indicatorSize: TabBarIndicatorSize.tab,
                 dividerColor: const Color(0XFFEFEBE9),
                 controller: tabController,
                 unselectedLabelColor: const Color(0XFF868686),
                 tabs: const [
-                  Tab(text: 'Coffee'),
-                  Tab(text: 'Non Coffee'),
-                  Tab(text: 'Pastry'),
+                  Tab(text: AppStrings.homeScreenTab1),
+                  Tab(text: AppStrings.homeScreenTab2),
+                  Tab(text: AppStrings.homeScreenTab3),
                 ],
               ),
-
               Flexible(
                 child: TabBarView(
                   //physics: const NeverScrollableScrollPhysics(),
@@ -143,9 +122,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   children: [
                     Column(
                       children: [
-                        SizedBox(height: screenHeight * 0.01),
+                        SizedBox(height: 8.h),
                         SizedBox(
-                          height: screenHeight * 0.0517,
+                          height: 42.h,
                           child: ListView.builder(
                             shrinkWrap: true,
                             physics: const ClampingScrollPhysics(),
@@ -156,24 +135,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             ),
                           ),
                         ),
-                        SizedBox(height: screenHeight * 0.007),
-                        const ProductTile(
-                          productDescription: String.fromEnvironment('hi'),
+                        SizedBox(height: 4.h),
+                        ListView.builder(itemBuilder: (context, index) => ProductTile(
+                        productlabel:productItemData[index].productLabel,
+                        productDescription: productItemData[index].productDescription,
+                        productImage: productItemData[index].productImage,
+                        originalPrice: productItemData[index].productOriginalPrice),
+                        itemCount:productItemData.length,
+                        shrinkWrap: true,
                         ),
                       ],
                     ),
-                    //causing error
-                    //const SizedBox(height: 6),
-                    // SizedBox(
-                    //   height: screenHeight * 0.455,
-                    //   child: ListView.builder(
-                    //     shrinkWrap: true,
-                    //     itemCount: 2,
-                    //     itemBuilder: (context, index) {
-                    //       return ProductTile(productDescription: 'hello');
-                    //     },
-                    //   ),
-                    // ),
                     const Text('2'),
                     const Text('3'),
                   ],

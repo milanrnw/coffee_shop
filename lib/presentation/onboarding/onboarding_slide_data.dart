@@ -1,6 +1,8 @@
+import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:coffee_shop/model/onboarding_model.dart';
 import 'package:coffee_shop/presentation/custom_widgets/skip_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingSlideData extends StatefulWidget {
@@ -24,36 +26,28 @@ class OnboardingSlideData extends StatefulWidget {
 class _OnboardingSlideDataState extends State<OnboardingSlideData> {
   @override
   Widget build(BuildContext context) {
-    final screenheight = MediaQuery.of(context).size.height;
-    final screenwidth = MediaQuery.of(context).size.width;
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SkipButton(),
-        SizedBox(height: screenheight * 0.064),
+        SizedBox(height: 52.h),
         Image.asset(
           widget.onboardingData.imageurl,
-          width: screenwidth * 0.757,
-          height: screenheight * 0.321,
+          width: 284.w,
+          height: 261.h,
         ),
 
-        SizedBox(height: screenheight * 0.077),
+        SizedBox(height: 63.h),
         Text(
           widget.onboardingData.labeltext,
-          style: TextStyle(
-            fontSize: screenheight * 0.0246,
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppTextStyles.onboardingSlideLabel
         ),
 
-        SizedBox(height: screenheight * 0.0197),
+        SizedBox(height: 16.h),
         Text(
           widget.onboardingData.descriptiontext,
-          style: TextStyle(
-            fontSize: screenheight * 0.0197,
-          ),
+          style: AppTextStyles.onboardingSlideDescription
         ),
 
         Flexible(
@@ -68,8 +62,8 @@ class _OnboardingSlideDataState extends State<OnboardingSlideData> {
             count: widget.slidelength,
             effect: ExpandingDotsEffect(
               activeDotColor: Color(0XFF5D4037),
-              dotHeight: screenheight * 0.01477,
-              dotWidth: screenheight * 0.01477,
+              dotHeight: 12.h,
+              dotWidth: 12.h,
               expansionFactor: 2,
             ),
             ),
@@ -77,14 +71,14 @@ class _OnboardingSlideDataState extends State<OnboardingSlideData> {
               onTap: () => widget.ontapbutton(),
               
               child: Container(
-                width: screenwidth * 0.416,
+                width: 156.w,
                 padding: EdgeInsets.symmetric(
                   horizontal: 24,
                   vertical: 16,
                 ),
                 decoration: BoxDecoration(
                   color: Color(0XFF5D4037),
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,12 +88,12 @@ class _OnboardingSlideDataState extends State<OnboardingSlideData> {
                       widget.onboardingData.buttontext,
                       style: TextStyle(
                         color: Color(0XFFFEFEFE),
-                        fontSize: screenheight * 0.0172,
+                        fontSize: 14.h,
                       ),
                     ),
                     Icon(Icons.arrow_forward,
                     color: Color(0XFFFEFEFE),
-                    size: screenheight * 0.0197),
+                    size: 16.r),
                   ],
                 ),
               ),

@@ -1,3 +1,5 @@
+import 'package:coffee_shop/constants/app_strings.dart';
+import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:coffee_shop/presentation/authentication/privacy_polcy.dart';
 import 'package:coffee_shop/presentation/authentication/terms_of_service.dart';
 import 'package:flutter/gestures.dart';
@@ -13,13 +15,13 @@ class TermsAndPrivacyText extends StatelessWidget {
         textAlign: TextAlign.center,
         text: TextSpan(
           children: [
-            const TextSpan(
-              text: 'By tapping "Register" you agree to our\n',
-              style: TextStyle(fontSize: 12, color: Color(0XFF7C7C7C)),
+            TextSpan(
+              text: AppStrings.registerTermsAndPrivacyText1,
+              style: AppTextStyles.registerTermsAndPrivacyText1,
             ),
             TextSpan(
-              text: 'Terms of Use',
-              style: const TextStyle(fontSize: 12, color: Color(0XFF032172)),
+              text: AppStrings.registerTermsAndPrivacyText2,
+              style:  AppTextStyles.registerTermsAndPrivacyText2,
               recognizer: TapGestureRecognizer()
                 ..onTap = () => Navigator.push(
                       context,
@@ -28,13 +30,13 @@ class TermsAndPrivacyText extends StatelessWidget {
                       ),
                     ),
             ),
-            const TextSpan(
-              text: ' and ',
-              style: TextStyle(fontSize: 12, color: Color(0XFF7C7C7C)),
+            TextSpan(
+              text: AppStrings.registerTermsAndPrivacyText3,
+              style: AppTextStyles.registerTermsAndPrivacyText3,
             ),
             TextSpan(
-              text: 'Privacy Policy',
-              style: const TextStyle(fontSize: 12, color: Color(0XFF032172)),
+              text: AppStrings.registerTermsAndPrivacyText4,
+              style: AppTextStyles.registerTermsAndPrivacyText4,
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   Navigator.push(

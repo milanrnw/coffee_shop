@@ -1,4 +1,6 @@
+import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AuthButton extends StatelessWidget {
   const AuthButton({
@@ -12,31 +14,26 @@ class AuthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
 
     return Center(
       child: ElevatedButton(
         style: ButtonStyle(
           fixedSize: WidgetStatePropertyAll(
-            Size(screenWidth, screenHeight * 0.059),
+            Size(335.w, 48.h), //Mediaquery let us use max width, but do flutterscreenutil?
           ),
           backgroundColor: const WidgetStatePropertyAll(
             Color(0XFFCACACA),
           ),
           shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
             ),
           ),
         ),
         onPressed: () => onTap(),
         child: Text(
           buttonText,
-          style: TextStyle(
-            color: Color(0XFFFFFFFF),
-            fontSize: 14,
-          ),
+          style: AppTextStyles.authButton,
         ),
       ),
     );

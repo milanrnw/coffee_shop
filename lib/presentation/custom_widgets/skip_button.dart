@@ -1,3 +1,4 @@
+import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:coffee_shop/presentation/authentication/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,7 @@ class SkipButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        InkWell(
+        GestureDetector(
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -19,11 +20,7 @@ class SkipButton extends StatelessWidget {
           },
           child: Text(
             'Skip',
-            style: TextStyle(
-              fontWeight: FontWeight.normal,
-              color: Color(0XFF3C3C3C),
-              fontSize: 14,
-            ),
+            style: AppTextStyles.skipButton,
           ),
         ),
       ],

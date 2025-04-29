@@ -1,4 +1,7 @@
+import 'package:coffee_shop/constants/app_strings.dart';
+import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OtpLoadingScreen extends StatefulWidget {
   const OtpLoadingScreen({
@@ -27,8 +30,6 @@ class _OtpLoadingScreenState extends State<OtpLoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: const Color(0XFFFEFEFE),
       body: Center(
@@ -40,22 +41,14 @@ class _OtpLoadingScreenState extends State<OtpLoadingScreen> {
               'assets/images/coffee_loading.gif',
               scale: 0.5,
             ),
-            SizedBox(height: screenHeight * 0.01),
-            const Text(
-              'Please wait a minute',
-              style: TextStyle(
-                fontSize: 14,
-                color: Color(0XFF3C3C3C),
-                fontWeight: FontWeight.w600,
-              ),
+            SizedBox(height: 16.h),
+            Text(
+              AppStrings.otpLoadingScreenLabel,
+              style: AppTextStyles.otpLoadingScreenLabel,
             ),
-            const Text(
-              'We will send you the otp code',
-              style: TextStyle(
-                fontSize: 14,
-                color: Color(0XFF3C3C3C),
-                fontWeight: FontWeight.normal,
-              ),
+            Text(
+              AppStrings.otpLoadingScreenDescription,
+              style: AppTextStyles.otpLoadingScreenDescription,
             )
           ],
         ),

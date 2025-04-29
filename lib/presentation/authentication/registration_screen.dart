@@ -1,3 +1,4 @@
+import 'package:coffee_shop/constants/app_strings.dart';
 import 'package:coffee_shop/presentation/authentication/login_screen.dart';
 import 'package:coffee_shop/presentation/custom_widgets/auth_button.dart';
 import 'package:coffee_shop/presentation/custom_widgets/auth_screen_footer_text.dart';
@@ -6,6 +7,7 @@ import 'package:coffee_shop/presentation/custom_widgets/send_otp_code_popup.dart
 import 'package:coffee_shop/presentation/custom_widgets/shop_fee_icon.dart';
 import 'package:coffee_shop/presentation/custom_widgets/terms_and_privacy_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -20,15 +22,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       backgroundColor: const Color(0XFFF5F5F5),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: screenWidth * 0.053,
+            horizontal: 20.w,
           ),
           child: Center(
             child: SingleChildScrollView(
@@ -37,26 +36,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 //mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: screenHeight * 0.127),
+                  SizedBox(height: 103.h),
                   ShopFeeIcon(),
-                  SizedBox(height: screenHeight * 0.0344),
+                  SizedBox(height: 28.h),
                   CommonTextField(
                       controller: nameController,
                       labelName: 'Name',
-                      hintText: 'Input your name',
+                      hintText: AppStrings.registerNameHint,
                       textInputAction: TextInputAction.next,
                       textInputType: TextInputType.name),
-                  SizedBox(height: screenHeight * 0.01),
+                  SizedBox(height: 8.h),
                   CommonTextField(
                     controller: numberController,
                     labelName: 'Mobile No.',
-                    hintText: 'Input your number',
+                    hintText: AppStrings.registerNumberHint,
                     textInputAction: TextInputAction.done,
                     textInputType: TextInputType.number,
                   ),
-                  SizedBox(height: screenHeight * 0.02),
+                  SizedBox(height: 16.h),
                   TermsAndPrivacyText(),
-                  SizedBox(height: screenHeight * 0.0344),
+                  SizedBox(height: 28.h),
                   AuthButton(
                       buttonText: 'Register',
                       onTap: () {
@@ -65,11 +64,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             barrierDismissible: false,
                             builder: (context) => SendOtpCodePopup());
                       }),
-                  SizedBox(height: screenHeight * 0.225),
+                  SizedBox(height: 183.h),
 
                   AuthScreenFooterText(
-                      initialText: 'Have an account? ',
-                      linkText: 'Login',
+                      initialText: AppStrings.registerFooterText,
+                      linkText: AppStrings.registerLinkText,
                       onTapLink: () {
                         Navigator.pushAndRemoveUntil(
                             context,

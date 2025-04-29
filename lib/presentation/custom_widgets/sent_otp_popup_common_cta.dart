@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SentOtpPopupCommonCta extends StatelessWidget {
   const SentOtpPopupCommonCta({
@@ -28,12 +29,12 @@ class SentOtpPopupCommonCta extends StatelessWidget {
           border: Border.all(
             color: Color(0XFF5D4037),
           ),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         child: Text(
           buttonText,
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 14.sp,
             color: buttonTextColor ?? const Color(0XFFFEFEFE),
           ),
         ),

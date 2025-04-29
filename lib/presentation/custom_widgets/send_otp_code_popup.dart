@@ -1,7 +1,10 @@
+import 'package:coffee_shop/constants/app_strings.dart';
+import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:coffee_shop/presentation/authentication/confirm_otp_screen.dart';
 import 'package:coffee_shop/presentation/authentication/otp_loading_screen.dart';
 import 'package:coffee_shop/presentation/custom_widgets/sent_otp_popup_common_cta.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SendOtpCodePopup extends StatelessWidget {
   const SendOtpCodePopup({super.key});
@@ -14,7 +17,7 @@ class SendOtpCodePopup extends StatelessWidget {
     return Dialog(
       backgroundColor: Color(0XFFF5F5F5),
       insetPadding: EdgeInsets.symmetric(
-        horizontal: MediaQuery.of(context).size.width * 0.125,
+        horizontal: 48.w,
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -29,46 +32,31 @@ class SendOtpCodePopup extends StatelessWidget {
               height: 168,
               width: 161,
             ),
-            //SizedBox(height: 24),
-            SizedBox(height: screenHeight * 0.029),
+            SizedBox(height: 24.h),
             Text(
-              'Send OTP code',
-              style: TextStyle(
-                color: Color(0XFF000000),
-                fontSize: 14,
-              ),
+              AppStrings.sendOtpPopupLabel,
+              style: AppTextStyles.sendOtpPopupLabel,
             ),
-            //SizedBox(height: 8),
-            SizedBox(height: screenHeight * 0.01),
+            SizedBox(height: 8.h),
             RichText(
               text: TextSpan(
                 children: [
                   TextSpan(
                     text:
-                        'We will send the OTP code via SMS. Make sure the number',
-                    style: TextStyle(
-                      color: Color(0XFF555555),
-                      fontSize: 12,
-                    ),
+                        AppStrings.sendOtpPopupDescription1,
+                    style: AppTextStyles.sendOtpPopupDescription1,
                   ),
                   TextSpan(
-                      text: ' 1234567890 ',
-                      style: TextStyle(
-                        color: Color(0XFF3C3C3C),
-                        fontSize: 12,
-                      )),
+                      text: AppStrings.sendOtpPopupDescription2,
+                      style: AppTextStyles.sendOtpPopupDescription2,),
                   TextSpan(
-                    text: 'is active',
-                    style: TextStyle(
-                      color: Color(0XFF555555),
-                      fontSize: 12,
-                    ),
+                    text: AppStrings.sendOtpPopupDescription3,
+                    style: AppTextStyles.sendOtpPopupDescription3,
                   ),
                 ],
               ),
             ),
-            //SizedBox(height: 24),
-            SizedBox(height: screenHeight * 0.029),
+            SizedBox(height: 24.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -1,3 +1,4 @@
+import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -50,10 +51,7 @@ class CreatePinField extends StatelessWidget {
       autoFocus: false,
       enableActiveFill: true,
       autoDismissKeyboard: true,
-      textStyle: TextStyle(
-        fontSize: 24,
-        color: Color(0XFF555555),
-      ),
+      textStyle: AppTextStyles.createPinFieldText,
       showCursor: false,
       keyboardType: TextInputType.number,
       controller: createPinController,

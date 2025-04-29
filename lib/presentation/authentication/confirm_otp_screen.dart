@@ -1,9 +1,13 @@
+import 'package:coffee_shop/constants/app_colors.dart';
+import 'package:coffee_shop/constants/app_strings.dart';
+import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:coffee_shop/presentation/authentication/create_pin_screen.dart';
 import 'package:coffee_shop/presentation/authentication/otp_loading_screen.dart';
 import 'package:coffee_shop/presentation/custom_widgets/otp_textfield.dart';
 import 'package:coffee_shop/presentation/custom_widgets/auth_button.dart';
 import 'package:coffee_shop/presentation/custom_widgets/auth_screen_footer_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ConfirmOtpScreen extends StatefulWidget {
   const ConfirmOtpScreen({super.key});
@@ -17,8 +21,6 @@ class _ConfirmOtpScreenState extends State<ConfirmOtpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    //final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -26,17 +28,13 @@ class _ConfirmOtpScreenState extends State<ConfirmOtpScreen> {
         backgroundColor: Color(0XFFFEFEFE),
         centerTitle: false,
         leading: IconButton(
-            iconSize: 24,
+            iconSize: 24.sp,
             padding: EdgeInsets.symmetric(horizontal: 16),
             onPressed: () => Navigator.of(context).pop(),
             icon: Icon(Icons.arrow_back)),
         title: Text(
-          'Confirm OTP code',
-          style: TextStyle(
-            fontSize: 16,
-            color: Color(0XFF3C3C3C),
-            fontWeight: FontWeight.w600,
-          ),
+          AppStrings.confirmOtpAppBarTitle,
+          style: AppTextStyles.confirmOtpAppBarTitle,
         ),
       ),
       backgroundColor: Color(0XFFFEFEFE),
@@ -47,7 +45,7 @@ class _ConfirmOtpScreenState extends State<ConfirmOtpScreen> {
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
                   color: Color(0XFF3C3C3C).withValues(alpha: 0.15),
-                  blurRadius: 50,
+                  blurRadius: 50.r,
                   spreadRadius: 0,
                   offset: Offset(0, 50),
                 )
@@ -60,30 +58,27 @@ class _ConfirmOtpScreenState extends State<ConfirmOtpScreen> {
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  SizedBox(height: screenHeight * 0.04),
+                  SizedBox(height: 32.h),
                   Text(
-                    '1234567890',
-                    style: TextStyle(
-                      fontSize: 24,
-                    ),
+                    AppStrings.confirmOtpNumber,
+                    style: AppTextStyles.confirmOtpNumber,
                   ),
                   Text(
-                    'Enter the 5-digit OTP code that has been sent from SMS to complete your account registration',
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
+                    AppStrings.confirmOtpDescription,
+                    style: AppTextStyles.confirmOtpDescription,
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: screenHeight * 0.04),
+                  SizedBox(height: 32.h),
                   OtpTextfield(controller: otpController),
-                  SizedBox(height: screenHeight * 0.04),
+                  SizedBox(height: 32.h),
                   AuthScreenFooterText(
-                    initialText: 'Haven\'t got the confirmation code yet? ',
-                    linkText: 'Resend',
+                    initialText: AppStrings.confirmOtpFooterText,
+                    linkText: AppStrings.confirmOtpFooterLinkText,
                     onTapLink: () {},
-                    linkTextColor: Colors.blue,
+                    initialTextColor: Color(0XFF000000),
+                    linkTextColor: AppColors.semanticColorInfo,
                   ),
-                  SizedBox(height: screenHeight * 0.125),
+                  SizedBox(height: 102.h),
                   AuthButton(
                     buttonText: 'Confirm',
                     onTap: () {

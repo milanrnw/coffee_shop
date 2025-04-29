@@ -1,9 +1,11 @@
+import 'package:coffee_shop/constants/app_strings.dart';
 import 'package:coffee_shop/presentation/authentication/registration_screen.dart';
 import 'package:coffee_shop/presentation/custom_widgets/auth_button.dart';
 import 'package:coffee_shop/presentation/custom_widgets/auth_screen_footer_text.dart';
 import 'package:coffee_shop/presentation/custom_widgets/common_text_field.dart';
 import 'package:coffee_shop/presentation/custom_widgets/shop_fee_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,40 +19,34 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: const Color(0XFFF5F5F5),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: screenWidth * 0.053,
+            horizontal: 20.w,
           ),
           child: Center(
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: screenHeight * 0.192),
-
+                  SizedBox(height: 156.h),
                   ShopFeeIcon(),
-                  SizedBox(height: screenHeight * 0.04),
-                  
+                  SizedBox(height: 32.h),
                   CommonTextField(
                     controller: numberController,
-                    labelName: 'Mobile No.',
-                    hintText: 'Input your number',
+                    labelName: AppStrings.loginLabel,
+                    hintText: AppStrings.loginNumberHint,
                     textInputType: TextInputType.number,
                   ),
-                  SizedBox(height: screenHeight * 0.0197),
-
+                  SizedBox(height: 16.h),
                   AuthButton(buttonText: 'Login', onTap: () {}),
-                  SizedBox(height: screenHeight * 0.33),
-
+                  SizedBox(height: 268.h),
                   AuthScreenFooterText(
-                      initialText: 'Don\'t have and account? ',
-                      linkText: 'Register',
+                      initialText: AppStrings.loginFooterText,
+                      linkText: AppStrings.loginLinkText,
                       onTapLink: () {
                         Navigator.pushAndRemoveUntil(
                           context,

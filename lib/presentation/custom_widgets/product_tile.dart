@@ -1,12 +1,20 @@
+import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:coffee_shop/presentation/custom_widgets/product_rating.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductTile extends StatefulWidget {
   const ProductTile(
-      {super.key, this.originalPrice, required this.productDescription});
+      {super.key,
+      this.originalPrice,
+      required this.productlabel,
+      required this.productDescription,
+      required this.productImage});
 
   final double? originalPrice;
   final String productDescription;
+  final String productlabel;
+  final String productImage;
 
   @override
   State<ProductTile> createState() => _ProductTileState();
@@ -18,11 +26,10 @@ class _ProductTileState extends State<ProductTile> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
 
     return Container(
-      height: screenHeight * 0.10,
-      width: screenWidth,
+      height: 85.h,
+      width: screenWidth, //use flutterscreenutil
       padding: const EdgeInsets.symmetric(vertical: 0.01),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,12 +43,12 @@ class _ProductTileState extends State<ProductTile> {
                 alignment: Alignment.bottomCenter,
                 children: [
                   Container(
-                    height: screenHeight * 0.081,
-                    width: screenWidth * 0.176,
-                    decoration: const BoxDecoration(
+                    height: 69.h,
+                    width: 66.w,
+                    decoration:  BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(
-                            'assets/images/home/products/item_1.png'),
+                            widget.productImage,),
                       ),
                       shape: BoxShape.circle,
                       color: Color(0XFFF4F4F4),
@@ -51,7 +58,7 @@ class _ProductTileState extends State<ProductTile> {
                 ],
               ),
               SizedBox(
-                width: screenWidth * 0.021,
+                width: 8.w,
               ),
               Flexible(
                 child: Column(
@@ -59,25 +66,17 @@ class _ProductTileState extends State<ProductTile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Coffee Milk',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0XFF555555),
-                      ),
+                      widget.productlabel,
+                      style: AppTextStyles.productLabelText,
                     ),
-                    SizedBox(height: screenHeight * 0.01),
+                    SizedBox(height: 8.h),
                     Flexible(
                       child: LayoutBuilder(
                         builder: (context, constraints) //check
                             {
                           final span = TextSpan(
                             text: widget.productDescription,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal,
-                              color: Color(0XFF555555),
-                            ),
+                            style: AppTextStyles.productDescriptionText,
                           );
 
                           final tp = TextPainter(
@@ -101,11 +100,7 @@ class _ProductTileState extends State<ProductTile> {
                           return Text(
                             widget.productDescription,
                             maxLines: 2,
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal,
-                              color: Color(0XFF555555),
-                            ),
+                            style: AppTextStyles.productDescriptionText,
                           );
                         },
                       ),
@@ -116,42 +111,29 @@ class _ProductTileState extends State<ProductTile> {
             ],
           )),
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Rp 25.000',
-               style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xff555555),
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Rp 25.000',
+                  style: AppTextStyles.salePrice
                 ),
-              ),
-              
-              SizedBox(height: widget.originalPrice != null ? 8 : 4),
-              isTwoLines ? Text(
-                widget.originalPrice != null ? 'Rp 25.000' : '\n',
-                maxLines: 2,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0XFF555555),
-                ),
-              )
-
-              : const SizedBox(),
-              !isTwoLines ? Text(
-                widget.originalPrice != null ? 'Rp 25.000' : '',
-                maxLines: 2,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0XFF555555),
-                ),
-              )
-
-              : const SizedBox(),
-            ]
-          )
+                SizedBox(height: widget.originalPrice != null ? 8 : 4),
+                isTwoLines
+                    ? Text(
+                        widget.originalPrice != null ? 'Rp 25.000' : '\n',
+                        maxLines: 2,
+                        style: AppTextStyles.originalPrice,
+                      )
+                    : const SizedBox(),
+                !isTwoLines
+                    ? Text(
+                        widget.originalPrice != null ? 'Rp 25.000' : '',
+                        maxLines: 2,
+                        style: AppTextStyles.originalPrice,
+                      )
+                    : const SizedBox(),
+              ])
         ],
       ),
     );

@@ -1,4 +1,6 @@
+import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductRating extends StatelessWidget {
   const ProductRating({super.key,
@@ -12,7 +14,7 @@ class ProductRating extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.r),
       ),
 
       child: Row(
@@ -20,16 +22,12 @@ class ProductRating extends StatelessWidget {
           Icon(
             Icons.star_rate_rounded,
             color: Color(0XFFFFB800),
-            size: 14,
+            size: 14.r,
           ),
-          SizedBox(width: 2,),
+          SizedBox(width: 2),
           Text(
             rating.toString(),
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-              color: Color(0XFF3C3C3C),
-            ),
+            style: AppTextStyles.productRatingText,
           )
         ],
       ),

@@ -1,5 +1,6 @@
 import 'package:coffee_shop/model/pills_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Pills extends StatelessWidget {
   const Pills({
@@ -11,8 +12,6 @@ class Pills extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return Container(
       decoration: BoxDecoration(
         color: pillData.isSelected
@@ -26,16 +25,16 @@ class Pills extends StatelessWidget {
         children: [
           Icon(
             pillData.icon,
-            size: screenHeight * 0.0197,
+            size: 16,
             color: pillData.isSelected
                 ? const Color(0XFFFEFEFE)
                 : const Color(0XFF3C3C3C),
           ),
-          const SizedBox(width: 4),
+          SizedBox(width: 4.w),
           Text(
             pillData.text,
             style: TextStyle(
-              fontSize: screenHeight * 0.0148,
+              fontSize: 12.sp,
               color: pillData.isSelected
                   ? const Color(0XFFFEFEFE)
                   : const Color(0XFF3C3C3C),

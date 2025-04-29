@@ -1,4 +1,6 @@
+import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchTextField extends StatefulWidget {
   const SearchTextField({super.key});
@@ -12,20 +14,14 @@ class _SearchTextFieldState extends State<SearchTextField> {
 
   @override
   Widget build(BuildContext context) {
-    //final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
-
     return SizedBox(
-      width: screenWidth * 0.078,
-      height: 40,
+      width: 294.w,
+      height: 40.h,
       child: TextField(
         controller: TextEditingController(),
-        style: TextStyle(
-          fontSize: 14,
-          color: Color(0XFF3C3C3C),
-        ),
+        style: AppTextStyles.searchTextFieldText,
         cursorColor: Color(0XFF8A8A8A),
-        cursorHeight: 16,
+        cursorHeight: 16.h,
         cursorErrorColor: Colors.red,
         decoration: InputDecoration(
             suffixIcon: Icon(
@@ -38,19 +34,15 @@ class _SearchTextFieldState extends State<SearchTextField> {
                 width: 2,
                 color: Color(0XFFD7CCC8),
               ),
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
             ),
             hintText: "What would you like to drink today?",
-            hintStyle: TextStyle(
-              color: Color(0XFFCACACA),
-              fontSize: 12,
-              fontWeight: FontWeight.normal,
-            ),
+            hintStyle: AppTextStyles.searchTextFieldHintText,
             border: OutlineInputBorder(
               borderSide: BorderSide(
                 width: 2,color: Color(0XFFD7CCC8),
               ),
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
             )),
       ),
     );

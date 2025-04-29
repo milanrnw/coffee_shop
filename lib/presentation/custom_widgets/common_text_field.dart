@@ -1,4 +1,6 @@
+import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CommonTextField extends StatefulWidget {
   const CommonTextField({
@@ -23,50 +25,38 @@ class CommonTextField extends StatefulWidget {
 class _CommonTextFieldState extends State<CommonTextField> {
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    //final screenWidth = MediaQuery.of(context).size.width;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           widget.labelName,
-          style: TextStyle(
-            color: Color(0XFF3C3C3C),
-            fontSize: 12,
-          ),
+          style: AppTextStyles.loginLabel,
         ),
-        SizedBox(height: screenHeight * 0.005),
+        SizedBox(height: 4.h),
 
         TextField(
           keyboardType: widget.textInputType,
           textInputAction: widget.textInputAction,
           controller: widget.controller,
           cursorColor: Color(0XFF8A8A8A),
-          cursorHeight: 16,
+          cursorHeight: 16.h,
           cursorErrorColor: Colors.red,
-          style: TextStyle(
-            color: Color(0XFF3C3C3C),
-            fontSize: 14,
-          ),
+          style: AppTextStyles.commonTextFieldText,
           decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: Color(0XFF5D4037),
               ),
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
             ),
             hintText: widget.hintText,
-            hintStyle: TextStyle(
-              color: Color(0XFF8A8A8A),
-              fontSize: 14,
-              fontWeight: FontWeight.normal,
-            ),
+            hintStyle: AppTextStyles.loginNumberHint,
             border: OutlineInputBorder(
               borderSide: BorderSide(
                 color: Color(0XFF8A8A8A),
               ),
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
             )
           ),
         )
