@@ -1,8 +1,8 @@
 import 'package:coffee_shop/constants/app_strings.dart';
 import 'package:coffee_shop/constants/app_text_styles.dart';
+import 'package:coffee_shop/dashboard/dashboard_screen.dart';
 import 'package:coffee_shop/presentation/custom_widgets/auth_button.dart';
 import 'package:coffee_shop/presentation/custom_widgets/create_pin_field.dart';
-import 'package:coffee_shop/presentation/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -70,10 +70,7 @@ class _CreatePinState extends State<CreatePin> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 56),
-                        child: Icon(Icons.remove_red_eye_outlined),
-                      ),
+                      Icon(Icons.remove_red_eye_outlined),
                     ],
                     ),
                     SizedBox(height: 240.h),
@@ -81,7 +78,7 @@ class _CreatePinState extends State<CreatePin> {
                         buttonText: 'Confirm',
                         onTap: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => HomeScreen()),
+                            MaterialPageRoute(builder: (context) => DashboardScreen()),
                           );
                         })
                   ],

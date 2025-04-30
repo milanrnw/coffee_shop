@@ -11,9 +11,6 @@ class SendOtpCodePopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    //final screenWidth = MediaQuery.of(context).size.width;
-
     return Dialog(
       backgroundColor: Color(0XFFF5F5F5),
       insetPadding: EdgeInsets.symmetric(

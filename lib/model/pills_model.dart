@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class PillsModel {
   final String text;
   final IconData icon;
-  final bool isSelected;
+  bool isSelected;
 
-  const PillsModel({
+  PillsModel({
     required this.text,
     required this.icon,
     this.isSelected = false,

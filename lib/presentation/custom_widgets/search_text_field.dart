@@ -26,7 +26,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
         decoration: InputDecoration(
             suffixIcon: Icon(
               Icons.search,
-              size: 24,
+              size: 24.r,
             ),
             suffixIconColor: Color(0XFFCACACA),
             focusedBorder: OutlineInputBorder(
