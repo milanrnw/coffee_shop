@@ -11,7 +11,7 @@ class CreatePinField extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return PinCodeTextField(
-      backgroundColor: Colors.amber,
+      //backgroundColor: Colors.amber,
       obscureText: true,
       animationType: AnimationType.fade,
       textInputAction: TextInputAction.done,

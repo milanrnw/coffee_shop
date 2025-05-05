@@ -19,7 +19,8 @@ class AuthButton extends StatelessWidget {
       child: ElevatedButton(
         style: ButtonStyle(
           fixedSize: WidgetStatePropertyAll(
-            Size(335.w, 48.h), //Mediaquery let us use max width, but do flutterscreenutil?
+            Size(375.w, 48.h), // In Mediaquery it automatically takes full width and then can apply padding.
+                              // How this works in flutterscreenutil as it fixes size 375 how will it run on wide device
           ),
           backgroundColor: const WidgetStatePropertyAll(
             Color(0XFFCACACA),

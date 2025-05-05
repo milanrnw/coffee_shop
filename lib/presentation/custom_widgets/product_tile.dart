@@ -6,15 +6,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ProductTile extends StatefulWidget {
   const ProductTile(
       {super.key,
-      this.originalPrice,
+      this.originalPrice = 0,
       required this.productlabel,
       required this.productDescription,
-      required this.productImage});
+      required this.productImage,
+      required this.productRatings,});
 
   final double? originalPrice;
   final String productDescription;
   final String productlabel;
   final String productImage;
+  final double productRatings;
 
   @override
   State<ProductTile> createState() => _ProductTileState();
@@ -54,7 +56,7 @@ class _ProductTileState extends State<ProductTile> {
                       color: Color(0XFFF4F4F4),
                     ),
                   ),
-                  ProductRating(rating: 4.9),
+                  ProductRating(rating: widget.productRatings),
                 ],
               ),
               SizedBox(
@@ -72,7 +74,7 @@ class _ProductTileState extends State<ProductTile> {
                     SizedBox(height: 8.h),
                     Flexible(
                       child: LayoutBuilder(
-                        builder: (context, constraints) //check
+                        builder: (context, constraints)
                             {
                           final span = TextSpan(
                             text: widget.productDescription,
@@ -115,7 +117,7 @@ class _ProductTileState extends State<ProductTile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Rp 25.000',
+                 widget.originalPrice.toString(),
                   style: AppTextStyles.salePrice
                 ),
                 SizedBox(height: widget.originalPrice != null ? 8 : 4),

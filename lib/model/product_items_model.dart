@@ -4,6 +4,7 @@ class ProductItemsModel {
   final String productImage;
   final double productPrice;
   final double? productOriginalPrice;
+  final double productRatings;
 
   ProductItemsModel({
     required this.productImage,
@@ -11,5 +12,6 @@ class ProductItemsModel {
     required this.productDescription,
     required this.productPrice,
     this.productOriginalPrice,
+    required this.productRatings,
   });
 }

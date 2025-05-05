@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:coffee_shop/presentation/home/search_bar.dart' as sb;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -50,7 +49,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               HomeScreenCarousel(),
               SizedBox(height: 16.h),
               TabBar(
-                labelStyle: AppTextStyles.homeScreenTab, //faded
+                labelPadding: EdgeInsets.all(0),
+                labelStyle: AppTextStyles.homeScreenTab,
                 indicatorColor: const Color(0XFF5D4037),
                 indicatorSize: TabBarIndicatorSize.tab,
                 dividerColor: const Color(0XFFEFEBE9),
