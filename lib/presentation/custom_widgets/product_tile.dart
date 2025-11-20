@@ -30,7 +30,7 @@ class _ProductTileState extends State<ProductTile> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      height: 85.h,
+      height: 69.h,
       width: screenWidth, //use flutterscreenutil
       padding: const EdgeInsets.symmetric(vertical: 0.01),
       child: Row(

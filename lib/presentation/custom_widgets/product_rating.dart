@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ProductRating extends StatelessWidget {
   const ProductRating({super.key,
   required this.rating});
-
   final double rating;
 
   @override

@@ -55,4 +55,6 @@ abstract class AppStrings {
   static const String bottomNavigationBarNav1 = "Home";
   static const String bottomNavigationBarNav2 = "History";
   static const String bottomNavigationBarNav3 = "Account";
+
+  static const String checkoutTitle = "Checkout";
 }

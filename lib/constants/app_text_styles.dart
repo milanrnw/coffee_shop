@@ -230,4 +230,12 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.w500,
     color: AppColors.brandColor,
   );
+
+  static TextStyle checkOutTitleBar = GoogleFonts.poppins(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textColorHeading,
+  );
+
+  static TextStyle? get checkoutPayNowButton => null;
 }

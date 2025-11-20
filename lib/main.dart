@@ -1,6 +1,5 @@
-import 'package:coffee_shop/dashboard/dashboard_screen.dart';
-import 'package:coffee_shop/presentation/home/home_screen.dart';
-import 'package:coffee_shop/presentation/home/home_screen_sliver.dart';
+import 'package:coffee_shop/presentation/authentication/login_screen.dart';
+import 'package:coffee_shop/presentation/checkout/checkout_screen.dart';
 import 'package:coffee_shop/presentation/onboarding/onboarding_main.dart';
 import 'package:coffee_shop/product/product_screen.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: HomeScreenSliver(),
+        home: CheckoutScreen(),
       ),
     );
   }

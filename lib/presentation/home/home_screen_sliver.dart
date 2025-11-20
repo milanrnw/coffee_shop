@@ -13,8 +13,8 @@ class HomeScreenSliver extends StatefulWidget {
   State<HomeScreenSliver> createState() => _HomeScreenSliverState();
 }
 
-class _HomeScreenSliverState extends State<HomeScreenSliver> with TickerProviderStateMixin {
-
+class _HomeScreenSliverState extends State<HomeScreenSliver>
+    with TickerProviderStateMixin {
   late TabController tabController;
   final _controller = ScrollController();
 
@@ -36,22 +36,33 @@ class _HomeScreenSliverState extends State<HomeScreenSliver> with TickerProvider
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: CustomScrollView(
+      body: SafeArea(
+          child: CustomScrollView(
         controller: _controller,
         //physics: const ClampingScrollPhysics(),
         slivers: [
           SliverAppBar(
+            elevation: 0,
+            scrolledUnderElevation: 0,
+            surfaceTintColor: Colors.transparent,
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            forceElevated: false,
             title: SearchBar(),
             pinned: true,
           ),
-
           SliverToBoxAdapter(
-            child: Padding(padding: EdgeInsets.symmetric(horizontal: 20),
-            child: HomeScreenCarousel()),
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: HomeScreenCarousel()),
           ),
-
           SliverAppBar(
+            automaticallyImplyLeading: false,
             pinned: true,
+            elevation: 0,
+            scrolledUnderElevation: 0,
+            surfaceTintColor: Colors.transparent,
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            forceElevated: false,
             title: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: TabBar(
@@ -63,14 +74,13 @@ class _HomeScreenSliverState extends State<HomeScreenSliver> with TickerProvider
                 controller: tabController,
                 unselectedLabelColor: const Color(0XFF868686),
                 tabs: [
-                  Tab(text: AppStrings.homeScreenTab1,),
-                  Tab(text: AppStrings.homeScreenTab2,),
-                  Tab(text: AppStrings.homeScreenTab3,),
+                  Tab(text: AppStrings.homeScreenTab1),
+                  Tab(text: AppStrings.homeScreenTab2),
+                  Tab(text: AppStrings.homeScreenTab3),
                 ],
               ),
             ),
           ),
-
           SliverFillRemaining(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -84,7 +94,6 @@ class _HomeScreenSliverState extends State<HomeScreenSliver> with TickerProvider
               ),
             ),
           )
-          
         ],
       )),
     );

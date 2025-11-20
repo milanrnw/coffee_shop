@@ -60,6 +60,52 @@ final productItemData = [
           "Espresso with mocha sause, milk and whipped cream",
       productPrice: 29.000,
       productRatings: 4.7),
+
+      ProductItemsModel(
+      productImage: "assets/images/home/products/item_1.png",
+      productLabel: "Coffee Milk",
+      productDescription: "ice americano + fresh milk",
+      productPrice: 25.000,
+      productRatings: 4.9),
+      
+  ProductItemsModel(
+      productImage: "assets/images/home/products/item_2.png",
+      productLabel: "Cocoa Caramel Latte",
+      productDescription: "streamed milk with mocha and caramel sauces",
+      productPrice: 35.500,
+      productRatings: 4.6),
+      
+  ProductItemsModel(
+      productImage: "assets/images/home/products/item_3.png",
+      productLabel: "Nitro Cold Brew",
+      productDescription:
+          "cold brew with nitrogen without sugar, velvety crema.",
+      productPrice: 31.000,
+      productRatings: 4.4),
+
+  ProductItemsModel(
+      productImage: "assets/images/home/products/item_4.png",
+      productLabel: "Caffe Mocha",
+      productDescription:
+          "Espresso with mocha sause, milk and whipped cream",
+      productPrice: 29.000,
+      productRatings: 4.7),
+
+  ProductItemsModel(
+      productImage: "assets/images/home/products/item_3.png",
+      productLabel: "Nitro Cold Brew",
+      productDescription:
+          "cold brew with nitrogen without sugar, velvety crema.",
+      productPrice: 31.000,
+      productRatings: 4.4),
+
+  ProductItemsModel(
+      productImage: "assets/images/home/products/item_4.png",
+      productLabel: "Caffe Mocha",
+      productDescription:
+          "Espresso with mocha sause, milk and whipped cream",
+      productPrice: 29.000,
+      productRatings: 4.7),      
 ];
 
 List<PillsModel> pillsList = [
