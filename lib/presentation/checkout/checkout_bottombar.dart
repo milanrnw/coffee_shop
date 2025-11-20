@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CheckoutBottomBar extends StatelessWidget {
-  const CheckoutBottomBar({super.key, required this.onCheckoutPressed});
+  const CheckoutBottomBar({
+    super.key,
+    required this.onCheckoutPressed,
+    required this.totalPrice, // Added this
+  });
 
   final VoidCallback onCheckoutPressed;
+  final String totalPrice; // Added this
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,7 @@ class CheckoutBottomBar extends StatelessWidget {
               ),
               SizedBox(height: 4.h),
               Text(
-                "Rp. 25.000",
+                totalPrice, // Using the dynamic price
                 style: AppTextStyles.createPinAppBarTitle,
               ),
             ],
@@ -50,7 +55,7 @@ class CheckoutBottomBar extends StatelessWidget {
               onPressed: onCheckoutPressed,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.brandColor,
-                elevation: 0, // Flat look
+                elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.r),
                 ),

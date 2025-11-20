@@ -6,9 +6,11 @@ class OrderCard extends StatelessWidget {
   const OrderCard({
     super.key,
     required this.onQuantityChanged,
+    required this.quantity, // <--- Added this parameter
   });
 
   final Function(int) onQuantityChanged;
+  final int quantity; // <--- Added this variable
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class OrderCard extends StatelessWidget {
                     width: 70.w,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Color(0XFFF4F4F4),
+                      color: const Color(0XFFF4F4F4),
                     ),
                   ),
                   Positioned(
@@ -94,7 +96,7 @@ class OrderCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "x1",
+                          "x$quantity", // <--- Updated to show dynamic quantity
                           style: TextStyle(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
@@ -127,7 +129,9 @@ class OrderCard extends StatelessWidget {
                             color: Colors.black54, size: 24.sp),
                         SizedBox(width: 8.w),
                         QuantityAdjust(
-                            quantity: 1, onQuantityChanged: onQuantityChanged)
+                          quantity: quantity, // <--- Passing the quantity here
+                          onQuantityChanged: onQuantityChanged,
+                        )
                       ],
                     ),
                     SizedBox(height: 16.h),

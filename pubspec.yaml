@@ -70,6 +70,7 @@ flutter:
     - assets/images/onboarding/
     - assets/images/home/carousel/
     - assets/images/home/products/
+    - assets/images/voucher/
     - assets/icons/
     
   # An image asset can refer to one or more resolution-specific "variants", see
