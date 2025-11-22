@@ -29,12 +29,8 @@ class VoucherItemWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ICON WITH IMAGE
             _buildVoucherIcon(voucher.imagePath),
-
             SizedBox(width: 12.w),
-
-            // TEXT
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,8 +66,6 @@ class VoucherItemWidget extends StatelessWidget {
                 ],
               ),
             ),
-
-            // SELECTION RADIO
             if (isAvailable)
               Padding(
                 padding: EdgeInsets.only(left: 8.w),
@@ -101,10 +95,9 @@ class VoucherItemWidget extends StatelessWidget {
     return Container(
       width: 48.w,
       height: 48.w,
-      padding:
-          EdgeInsets.all(8.w), // Add padding if logo touches the circle edges
+      padding: EdgeInsets.all(8.w),
       decoration: const BoxDecoration(
-        color: Color(0xFFF4F4F4), // Light grey background
+        color: Color(0xFFF4F4F4),
         shape: BoxShape.circle,
       ),
       child: Image.asset(

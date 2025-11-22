@@ -1,9 +1,10 @@
 import 'package:coffee_shop/constants/app_strings.dart';
-import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:coffee_shop/model/voucher_model.dart';
 import 'package:coffee_shop/presentation/checkout/checkout_detail.dart';
 import 'package:coffee_shop/presentation/checkout/checkout_bottombar.dart';
-import 'package:coffee_shop/presentation/transaction/transaction_success.dart';
+import 'package:coffee_shop/presentation/transaction/order_receipt_screen.dart';
+import 'package:coffee_shop/presentation/transaction/transaction_loading_screen.dart';
+import 'package:coffee_shop/presentation/transaction/transaction_successful_screen.dart';
 import 'package:coffee_shop/product/order_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -126,7 +127,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         onCheckoutPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const TransactionSuccess()),
+            MaterialPageRoute(
+                builder: (context) => const TransactionLoadingScreen(
+                    nextScreen: TransactionSuccessfulScreen(
+                        nextScreen: OrderReceiptScreen()))),
           );
         },
       ),
