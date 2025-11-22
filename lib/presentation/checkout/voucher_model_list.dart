@@ -6,7 +6,7 @@ final List<VoucherModel> voucherList = [
     title: "Disc 10% up to Rp20.000",
     subtitle: "No minimum purchase",
     imagePath: "assets/images/voucher/voucher.png",
-    discountAmount: 10, // 10%
+    discountAmount: 10,
     isPercentage: true,
   ),
   VoucherModel(
@@ -14,7 +14,7 @@ final List<VoucherModel> voucherList = [
     title: "Disc 15% up to Rp25.000",
     subtitle: "Minimum spend Rp20.000",
     imagePath: "assets/images/voucher/voucher.png",
-    discountAmount: 15, // 15%
+    discountAmount: 15,
     isPercentage: true,
   ),
   VoucherModel(
@@ -33,6 +33,24 @@ final List<VoucherModel> voucherList = [
     warning: "Spend another Rp60,000 to enjoy this voucher",
     imagePath: "assets/images/voucher/voucher_unavailable2.png",
     discountAmount: 20000,
+    isPercentage: false,
+  ),
+  VoucherModel(
+    id: 5,
+    title: "Disc 30% up to Rp30.000",
+    subtitle: "Minimum spend Rp40.000",
+    warning: "Spend another RP20,000 to enjoy this voucher",
+    imagePath: "assets/images/voucher/voucher_unavailable3.png",
+    discountAmount: 30000,
+    isPercentage: false,
+  ),
+  VoucherModel(
+    id: 6,
+    title: "Disc 35% up to Rp55.000",
+    subtitle: "Minimum spend Rp85.000",
+    warning: "Spend another RP65,000 to enjoy this voucher",
+    imagePath: "assets/images/voucher/voucher_unavailable3.png",
+    discountAmount: 55000,
     isPercentage: false,
   ),
 ];

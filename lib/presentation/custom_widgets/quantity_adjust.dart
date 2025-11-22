@@ -7,11 +7,11 @@ class QuantityAdjust extends StatefulWidget {
   const QuantityAdjust({
     super.key,
     required this.quantity,
-    required this.onQuantityChanged, // Add this parameter
+    required this.onQuantityChanged,
   });
 
   final int quantity;
-  final Function(int) onQuantityChanged; // Callback function
+  final Function(int) onQuantityChanged;
 
   @override
   State<QuantityAdjust> createState() => _QuantityAdjustState();
@@ -30,14 +30,14 @@ class _QuantityAdjustState extends State<QuantityAdjust> {
     setState(() {
       _quantity++;
     });
-    widget.onQuantityChanged(_quantity); // Pass updated quantity to parent
+    widget.onQuantityChanged(_quantity);
   }
 
   void _decrement() {
     setState(() {
       if (_quantity > 1) _quantity--;
     });
-    widget.onQuantityChanged(_quantity); // Pass updated quantity to parent
+    widget.onQuantityChanged(_quantity);
   }
 
   @override
@@ -58,7 +58,7 @@ class _QuantityAdjustState extends State<QuantityAdjust> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 GestureDetector(
-                  onTap: _decrement, // Handle decrement action
+                  onTap: _decrement,
                   child: SvgPicture.asset(
                     "assets/icons/minus-svgrepo-com.svg",
                     height: 16.r,
@@ -74,7 +74,7 @@ class _QuantityAdjustState extends State<QuantityAdjust> {
                   child: Center(
                     child: FittedBox(
                       child: Text(
-                        "$_quantity", // Display the updated quantity
+                        "$_quantity",
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
@@ -84,7 +84,7 @@ class _QuantityAdjustState extends State<QuantityAdjust> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: _increment, // Handle increment action
+                  onTap: _increment,
                   child: SvgPicture.asset(
                     "assets/icons/plus-large-svgrepo-com.svg",
                     height: 16.r,

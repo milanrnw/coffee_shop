@@ -17,7 +17,7 @@ class CheckoutScreen extends StatefulWidget {
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
   int _quantity = 1;
-  final double _unitPrice = 25000; // Base price per item
+  final double _unitPrice = 25000;
   VoucherModel? _selectedVoucher;
 
   void _updateQuantity(int newQuantity) {
@@ -27,7 +27,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     });
   }
 
-  // Handler to update voucher state from child
   void _onVoucherSelected(VoucherModel? voucher) {
     setState(() {
       _selectedVoucher = voucher;
@@ -36,23 +35,21 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // --- CALCULATIONS ---
     double subtotal = _unitPrice * _quantity;
     double discountAmount = 0;
 
-    // Logic to calculate discount based on your model properties
     if (_selectedVoucher != null) {
       if (_selectedVoucher!.isPercentage) {
         discountAmount = subtotal * (_selectedVoucher!.discountAmount / 100);
       } else {
         discountAmount = _selectedVoucher!.discountAmount;
       }
-      // Cap discount at subtotal
-      if (discountAmount > subtotal) discountAmount = subtotal;
+      if (discountAmount > subtotal) {
+        discountAmount = subtotal;
+      }
     }
 
     double finalTotal = subtotal - discountAmount;
-    // ---------------------
 
     return Scaffold(
       backgroundColor: const Color(0XFFFEFEFE),
@@ -62,12 +59,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         centerTitle: false,
         leading: IconButton(
             iconSize: 24.sp,
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(Icons.arrow_back)),
+            icon: const Icon(Icons.arrow_back)),
         title: Text(
           AppStrings.checkoutTitle,
-          style: AppTextStyles.checkOutTitleBar,
+          style: TextStyle(
+              fontSize: 18.sp,
+              fontWeight: FontWeight.bold,
+              color: Colors.black),
         ),
       ),
       body: SingleChildScrollView(
@@ -80,15 +80,35 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
             OrderCard(
               onQuantityChanged: _updateQuantity,
-              quantity: _quantity, // Ensure OrderCard accepts this
+              quantity: _quantity,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+              child: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.arrow_back_ios_new_rounded,
+                        size: 14.sp, color: const Color(0xFF5D4037)),
+                    SizedBox(width: 6.w),
+                    Text(
+                      "Add Order",
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w700,
+                        color: const Color(0xFF5D4037),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             Divider(
               thickness: 4.h,
               color: const Color(0xFFF4F4F4),
             ),
             SizedBox(height: 16.h),
-
-            // PASSING DATA DOWN
             CheckoutDetail(
               selectedVoucher: _selectedVoucher,
               onVoucherSelected: _onVoucherSelected,
@@ -97,16 +117,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               total: finalTotal,
               quantity: _quantity,
             ),
+            SizedBox(height: 20.h),
           ],
         ),
       ),
       bottomNavigationBar: CheckoutBottomBar(
-        // Passing formatted total string
         totalPrice: "Rp. ${finalTotal.toStringAsFixed(0)}",
         onCheckoutPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => TransactionSuccess()),
+            MaterialPageRoute(builder: (context) => const TransactionSuccess()),
           );
         },
       ),

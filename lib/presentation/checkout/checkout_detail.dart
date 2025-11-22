@@ -1,5 +1,4 @@
 import 'package:coffee_shop/constants/app_colors.dart';
-import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:coffee_shop/model/voucher_model.dart';
 import 'package:coffee_shop/presentation/checkout/pickup_time_dialog.dart';
 import 'package:coffee_shop/presentation/checkout/voucher_model_list.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 enum OrderType { asap, later }
 
 class CheckoutDetail extends StatefulWidget {
-  // Added parameters for logic
   final VoucherModel? selectedVoucher;
   final Function(VoucherModel?) onVoucherSelected;
   final double subtotal;
@@ -35,6 +33,18 @@ class CheckoutDetail extends StatefulWidget {
 class _CheckoutDetailState extends State<CheckoutDetail> {
   OrderType _selectedOrderType = OrderType.asap;
   String _scheduledTime = "Schedule Pick Up";
+
+  final TextStyle _titleStyle = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w700,
+    color: Colors.black,
+  );
+
+  final TextStyle _subtitleStyle = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    color: Colors.grey[600],
+  );
 
   void _handleSelection(OrderType value) async {
     setState(() {
@@ -64,21 +74,17 @@ class _CheckoutDetailState extends State<CheckoutDetail> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("When do you want order?",
-                  style: AppTextStyles.createPinAppBarTitle),
+              Text("When do you want order?", style: _titleStyle),
               SizedBox(height: 4.h),
               Text("*We are open from 08.00 - 20.00 WIB",
-                  style: AppTextStyles.createPinDescription2),
+                  style: _subtitleStyle),
               SizedBox(height: 16.h),
               _buildRadioOption(
                 title: "As Soon as Possible",
                 subtitle: "Now - 10 Minute",
                 value: OrderType.asap,
               ),
-              Divider(
-                thickness: 2.h,
-                color: const Color(0xFFF4F4F4),
-              ),
+              Divider(thickness: 2.h, color: const Color(0xFFF4F4F4)),
               _buildRadioOption(
                 title: "Later",
                 subtitle: _selectedOrderType == OrderType.later
@@ -86,31 +92,21 @@ class _CheckoutDetailState extends State<CheckoutDetail> {
                     : "Schedule Pick Up",
                 value: OrderType.later,
               ),
-              Divider(
-                thickness: 2.h,
-                color: const Color(0xFFF4F4F4),
-              ),
-              Text("Payment Method", style: AppTextStyles.createPinAppBarTitle),
+              Divider(thickness: 2.h, color: const Color(0xFFF4F4F4)),
+              Text("Payment Method", style: _titleStyle),
               SizedBox(height: 8.h),
               Row(
                 children: [
-                  Text("Gopay(Rp85.000)", // Static balance as per design
-                      style: AppTextStyles.createPinDescription2),
-                  Spacer(),
+                  Text("Gopay(Rp85.000)", style: _subtitleStyle),
+                  const Spacer(),
                   Icon(Icons.arrow_forward_ios,
                       size: 20.sp, color: Colors.black54),
                 ],
               ),
               SizedBox(height: 8.h),
-              Divider(
-                thickness: 2.h,
-                color: const Color(0xFFF4F4F4),
-              ),
-
-              // --- VOUCHER BUTTON ---
+              Divider(thickness: 2.h, color: const Color(0xFFF4F4F4)),
               InkWell(
                 onTap: () async {
-                  // Navigate to Voucher Screen
                   final selectedId = await Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -118,41 +114,33 @@ class _CheckoutDetailState extends State<CheckoutDetail> {
                               initialSelectedId: widget.selectedVoucher?.id,
                             )),
                   );
-
-                  // Logic to update selection
                   if (selectedId != null) {
                     try {
                       final voucher =
                           voucherList.firstWhere((v) => v.id == selectedId);
                       widget.onVoucherSelected(voucher);
-                    } catch (e) {
-                      // Error handling
-                    }
+                    } catch (e) {}
                   }
-                  // Note: If user presses "Back" without selecting "Use", we do nothing.
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Voucher", style: AppTextStyles.createPinAppBarTitle),
+                    Text("Voucher", style: _titleStyle),
                     SizedBox(height: 4.h),
                     Row(
                       children: [
-                        // Dynamic Text Logic
                         Expanded(
                           child: Text(
                             widget.selectedVoucher != null
-                                ? widget.selectedVoucher!
-                                    .title // e.g. "Disc 15%..."
+                                ? widget.selectedVoucher!.title
                                 : "no voucher added",
                             style: widget.selectedVoucher != null
-                                ? AppTextStyles.createPinAppBarTitle
-                                    .copyWith(fontSize: 14.sp)
-                                : AppTextStyles.createPinDescription2,
+                                ? _titleStyle.copyWith(fontSize: 14.sp)
+                                : _subtitleStyle,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Icon(Icons.arrow_forward_ios,
                             size: 20.sp, color: Colors.black54),
                       ],
@@ -160,67 +148,52 @@ class _CheckoutDetailState extends State<CheckoutDetail> {
                   ],
                 ),
               ),
-              // --------------------
-
               SizedBox(height: 8.h),
-              Divider(
-                thickness: 2.h,
-                color: const Color(0xFFF4F4F4),
-              ),
+              Divider(thickness: 2.h, color: const Color(0xFFF4F4F4)),
             ],
           ),
         ),
         SizedBox(height: 16.h),
-        Divider(
-          thickness: 4.h,
-          color: const Color(0xFFF4F4F4),
-        ),
+        Divider(thickness: 4.h, color: const Color(0xFFF4F4F4)),
         SizedBox(height: 16.h),
-
-        // --- PAYMENT SUMMARY ---
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Payment Summary",
-                  style: AppTextStyles.createPinAppBarTitle),
+              Text("Payment Summary", style: _titleStyle),
               SizedBox(height: 8.h),
               Row(
                 children: [
-                  Text("Price", style: AppTextStyles.createPinDescription2),
-                  Spacer(),
-                  // Dynamic Subtotal
+                  Text("Price", style: _subtitleStyle),
+                  const Spacer(),
                   Text("Rp${widget.subtotal.toStringAsFixed(0)}",
-                      style: AppTextStyles.createPinDescription2),
+                      style: _subtitleStyle),
                 ],
               ),
               SizedBox(height: 4.h),
               Text("(${widget.quantity} items)",
-                  style: AppTextStyles.sendOtpPopupDescription1),
-
-              // Dynamic Discount Row (Only if discount exists)
+                  style: _subtitleStyle.copyWith(fontSize: 12.sp)),
               if (widget.discountAmount > 0) ...[
                 SizedBox(height: 8.h),
                 Row(
                   children: [
-                    Text("Voucher", style: AppTextStyles.createPinDescription2),
-                    Spacer(),
+                    Text("Voucher", style: _subtitleStyle),
+                    const Spacer(),
                     Text("-Rp${widget.discountAmount.toStringAsFixed(0)}",
-                        style: AppTextStyles.createPinDescription2
-                            .copyWith(color: Colors.red)),
+                        style: _subtitleStyle.copyWith(color: Colors.red)),
                   ],
                 ),
               ],
-
               SizedBox(height: 8.h),
               Row(
                 children: [
-                  Text("Total", style: AppTextStyles.createPinDescription1),
-                  Spacer(),
-                  // Dynamic Total
+                  Text("Total",
+                      style: _subtitleStyle.copyWith(
+                          fontWeight: FontWeight.bold, color: Colors.black)),
+                  const Spacer(),
                   Text("Rp${widget.total.toStringAsFixed(0)}",
-                      style: AppTextStyles.createPinAppBarTitle),
+                      style: _titleStyle),
                 ],
               ),
               SizedBox(height: 2.h),
@@ -246,9 +219,9 @@ class _CheckoutDetailState extends State<CheckoutDetail> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: AppTextStyles.createPinAppBarTitle),
+                  Text(title, style: _titleStyle),
                   SizedBox(height: 4.h),
-                  Text(subtitle, style: AppTextStyles.createPinDescription2),
+                  Text(subtitle, style: _subtitleStyle),
                 ],
               ),
             ),

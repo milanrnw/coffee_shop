@@ -1,7 +1,4 @@
-import 'package:coffee_shop/presentation/authentication/login_screen.dart';
 import 'package:coffee_shop/presentation/checkout/checkout_screen.dart';
-import 'package:coffee_shop/presentation/onboarding/onboarding_main.dart';
-import 'package:coffee_shop/product/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

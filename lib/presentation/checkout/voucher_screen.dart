@@ -1,12 +1,12 @@
 import 'package:coffee_shop/constants/app_colors.dart';
 import 'package:coffee_shop/constants/app_text_styles.dart';
-import 'package:coffee_shop/model/voucher_model.dart';
+import 'package:coffee_shop/presentation/checkout/voucher_item_widget.dart';
 import 'package:coffee_shop/presentation/checkout/voucher_model_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VoucherScreen extends StatefulWidget {
-  final int? initialSelectedId; // Added to accept initial selection
+  final int? initialSelectedId;
 
   const VoucherScreen({super.key, this.initialSelectedId});
 
@@ -20,7 +20,7 @@ class _VoucherScreenState extends State<VoucherScreen> {
   @override
   void initState() {
     super.initState();
-    _selectedVoucherId = widget.initialSelectedId; // Initialize selection
+    _selectedVoucherId = widget.initialSelectedId;
   }
 
   @override
@@ -46,7 +46,6 @@ class _VoucherScreenState extends State<VoucherScreen> {
       ),
       body: Column(
         children: [
-          // 1. VOUCHER CODE INPUT
           Padding(
             padding: EdgeInsets.all(16.w),
             child: Container(
@@ -66,8 +65,6 @@ class _VoucherScreenState extends State<VoucherScreen> {
               ),
             ),
           ),
-
-          // 2. VOUCHER LIST
           Expanded(
             child: ListView.separated(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -76,18 +73,27 @@ class _VoucherScreenState extends State<VoucherScreen> {
                   Divider(color: Colors.grey[200], thickness: 1),
               itemBuilder: (context, index) {
                 final voucher = voucherList[index];
-                return _buildVoucherItem(voucher);
+                return VoucherItemWidget(
+                  voucher: voucher,
+                  isSelected: voucher.id == _selectedVoucherId,
+                  onTap: () {
+                    setState(() {
+                      if (_selectedVoucherId == voucher.id) {
+                        _selectedVoucherId = null;
+                      } else {
+                        _selectedVoucherId = voucher.id;
+                      }
+                    });
+                  },
+                );
               },
             ),
           ),
-
-          // 3. BOTTOM BAR (Only show if selected)
           if (_selectedVoucherId != null)
             Container(
-              height: 76.h, // Increased height to fit button nicely
+              height: 76.h,
               width: 375.w,
-              padding: EdgeInsets.symmetric(
-                  horizontal: 20.w, vertical: 12.h), // Adjusted padding
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
@@ -102,15 +108,16 @@ class _VoucherScreenState extends State<VoucherScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("1 promo selected",
-                      style: TextStyle(
-                          fontSize: 14.sp, fontWeight: FontWeight.w600)),
+                  Text(
+                    "1 promo selected",
+                    style: AppTextStyles.createPinAppBarTitle
+                        .copyWith(fontSize: 14.sp),
+                  ),
                   SizedBox(
                     width: 156.w,
                     height: 48.h,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Apply voucher logic: Return ID
                         Navigator.pop(context, _selectedVoucherId);
                       },
                       style: ElevatedButton.styleFrom(
@@ -130,116 +137,6 @@ class _VoucherScreenState extends State<VoucherScreen> {
               ),
             )
         ],
-      ),
-    );
-  }
-
-  Widget _buildVoucherItem(VoucherModel voucher) {
-    bool isAvailable = voucher.warning == null;
-    bool isSelected = _selectedVoucherId == voucher.id;
-
-    Color titleColor = isAvailable ? Colors.black : Colors.grey.shade400;
-    Color subtitleColor =
-        isAvailable ? Colors.grey.shade600 : Colors.grey.shade400;
-
-    return InkWell(
-      onTap: isAvailable
-          ? () {
-              setState(() {
-                if (_selectedVoucherId == voucher.id) {
-                  _selectedVoucherId = null;
-                } else {
-                  _selectedVoucherId = voucher.id;
-                }
-              });
-            }
-          : null,
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 12.h),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // ICON WITH IMAGE
-            _buildVoucherIcon(voucher.imagePath),
-
-            SizedBox(width: 12.w),
-
-            // TEXT
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    voucher.title,
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w700,
-                      color: titleColor,
-                    ),
-                  ),
-                  SizedBox(height: 4.h),
-                  Text(
-                    voucher.subtitle,
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w400,
-                      color: subtitleColor,
-                    ),
-                  ),
-                  if (!isAvailable) ...[
-                    SizedBox(height: 4.h),
-                    Text(
-                      voucher.warning!,
-                      style: TextStyle(
-                        fontSize: 11.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.red[400],
-                      ),
-                    ),
-                  ]
-                ],
-              ),
-            ),
-
-            // SELECTION RADIO
-            if (isAvailable)
-              Padding(
-                padding: EdgeInsets.only(left: 8.w),
-                child: Container(
-                  width: 24.w,
-                  height: 24.w,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: isSelected ? Colors.green : Colors.transparent,
-                    border: Border.all(
-                      color: isSelected ? Colors.green : Colors.grey.shade400,
-                      width: 1.5,
-                    ),
-                  ),
-                  child: isSelected
-                      ? Icon(Icons.check, color: Colors.white, size: 16.sp)
-                      : null,
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildVoucherIcon(String imagePath) {
-    return Container(
-      width: 48.w,
-      height: 48.w,
-      padding:
-          EdgeInsets.all(8.w), // Add padding if logo touches the circle edges
-      decoration: const BoxDecoration(
-        color: Color(0xFFF4F4F4), // Light grey background
-        shape: BoxShape.circle,
-      ),
-      child: Image.asset(
-        imagePath,
-        fit: BoxFit.contain,
       ),
     );
   }

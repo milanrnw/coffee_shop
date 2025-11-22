@@ -7,11 +7,11 @@ class CheckoutBottomBar extends StatelessWidget {
   const CheckoutBottomBar({
     super.key,
     required this.onCheckoutPressed,
-    required this.totalPrice, // Added this
+    required this.totalPrice,
   });
 
   final VoidCallback onCheckoutPressed;
-  final String totalPrice; // Added this
+  final String totalPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class CheckoutBottomBar extends StatelessWidget {
               ),
               SizedBox(height: 4.h),
               Text(
-                totalPrice, // Using the dynamic price
+                totalPrice,
                 style: AppTextStyles.createPinAppBarTitle,
               ),
             ],
