@@ -12,7 +12,8 @@ abstract class AppStrings {
       "Exciting prizes await you! Redeem yours by collecting all the points after purchase in the app!";
 
   static const String otpLoadingScreenLabel = "Please wait a minute";
-  static const String otpLoadingScreenDescription = "We will send you the otp code";
+  static const String otpLoadingScreenDescription =
+      "We will send you the otp code";
 
   static const String loginLabel = "Mobile No.";
   static const String loginNumberHint = "Input your number";
@@ -57,4 +58,6 @@ abstract class AppStrings {
   static const String bottomNavigationBarNav3 = "Account";
 
   static const String checkoutTitle = "Checkout";
+
+  static const String trackOrderTitle = "Tracking Order";
 }

@@ -1,32 +1,13 @@
+import 'package:coffee_shop/model/transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TransactionDetailCard extends StatelessWidget {
-  final String transactionId;
-  final String date;
-  final String time;
-  final String productName;
-  final String productOptions;
-  final int quantity;
-  final double price;
-  final double voucher;
-  final double total;
-  final String paymentMethod;
-  final String schedulePickUpTime;
+  final TransactionModel data;
 
   const TransactionDetailCard({
     super.key,
-    required this.transactionId,
-    required this.date,
-    required this.time,
-    required this.productName,
-    required this.productOptions,
-    required this.quantity,
-    required this.price,
-    required this.voucher,
-    required this.total,
-    required this.paymentMethod,
-    required this.schedulePickUpTime,
+    required this.data,
   });
 
   @override
@@ -80,11 +61,11 @@ class TransactionDetailCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 16.h),
-                _buildRow("ID Transaction", transactionId),
+                _buildRow("ID Transaction", data.transactionId),
                 SizedBox(height: 8.h),
-                _buildRow("Date", date),
+                _buildRow("Date", data.date),
                 SizedBox(height: 8.h),
-                _buildRow("Time", time),
+                _buildRow("Time", data.time),
                 SizedBox(height: 16.h),
                 Divider(color: const Color(0xFFF4F4F4), thickness: 1.h),
                 SizedBox(height: 16.h),
@@ -108,7 +89,7 @@ class TransactionDetailCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                productName,
+                                data.productName,
                                 style: TextStyle(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w700,
@@ -116,7 +97,7 @@ class TransactionDetailCard extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "x$quantity",
+                                "x${data.quantity}",
                                 style: TextStyle(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w600,
@@ -127,7 +108,7 @@ class TransactionDetailCard extends StatelessWidget {
                           ),
                           SizedBox(height: 4.h),
                           Text(
-                            productOptions,
+                            data.productOptions,
                             style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w400,
@@ -151,17 +132,20 @@ class TransactionDetailCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 8.h),
-                _buildRow("Price", "Rp${price.toStringAsFixed(0)}"),
+                _buildRow("Price", "Rp${data.price.toStringAsFixed(0)}"),
                 SizedBox(height: 4.h),
-                _buildRow("Voucher",
-                    voucher == 0 ? "0" : "-Rp${voucher.toStringAsFixed(0)}"),
+                _buildRow(
+                    "Voucher",
+                    data.voucher == 0
+                        ? "0"
+                        : "-Rp${data.voucher.toStringAsFixed(0)}"),
                 SizedBox(height: 4.h),
-                _buildRow("Total", "Rp${total.toStringAsFixed(0)}",
+                _buildRow("Total", "Rp${data.total.toStringAsFixed(0)}",
                     isBold: true),
                 SizedBox(height: 16.h),
-                _buildRow("Payment Method", paymentMethod),
+                _buildRow("Payment Method", data.paymentMethod),
                 SizedBox(height: 16.h),
-                _buildRow("Schedule Pick Up", schedulePickUpTime),
+                _buildRow("Schedule Pick Up", data.schedulePickUpTime),
               ],
             ),
           ),

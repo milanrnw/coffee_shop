@@ -1,6 +1,6 @@
 import 'package:coffee_shop/account/account_screen.dart';
 import 'package:coffee_shop/constants/app_colors.dart';
-import 'package:coffee_shop/history/history_screen.dart';
+import 'package:coffee_shop/presentation/history/history_screen.dart';
 import 'package:coffee_shop/presentation/home/home_screen_sliver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,7 +36,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
             )
           ],
           color: const Color(0XFFFEFEFE),
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(16.r),topRight: Radius.circular(16.r),),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16.r),
+            topRight: Radius.circular(16.r),
+          ),
         ),
         child: BottomNavigationBar(
           iconSize: 24.r,
@@ -60,12 +63,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home),
-            label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.horizontal_split_rounded),
-            label: "History"),
-            BottomNavigationBarItem(icon: Icon(Icons.account_box),
-            label: "Account"),
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.horizontal_split_rounded), label: "History"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.account_box), label: "Account"),
           ],
         ),
       ),

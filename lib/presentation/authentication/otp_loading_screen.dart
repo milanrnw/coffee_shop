@@ -38,7 +38,7 @@ class _OtpLoadingScreenState extends State<OtpLoadingScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/coffee_loading.gif',
+              'assets/gif/coffee_loading.gif',
               scale: 0.5,
             ),
             SizedBox(height: 16.h),
