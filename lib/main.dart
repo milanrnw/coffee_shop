@@ -1,5 +1,6 @@
 import 'package:coffee_shop/dashboard/dashboard_screen.dart';
 import 'package:coffee_shop/presentation/checkout/checkout_screen.dart';
+import 'package:coffee_shop/presentation/history/history_screen.dart';
 import 'package:coffee_shop/presentation/onboarding/onboarding_main.dart';
 import 'package:coffee_shop/presentation/product/product_screen.dart';
 import 'package:coffee_shop/presentation/rating/rate_app_screen.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: CheckoutScreen(),
+        home: DashboardScreen(),
       ),
     );
   }

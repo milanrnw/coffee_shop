@@ -1,107 +1,185 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class OrderedProductCard extends StatefulWidget {
-  const OrderedProductCard({super.key});
+class OrderedProductCard extends StatelessWidget {
+  final bool isHistory;
+  final bool showAction; // <--- NEW PARAMETER
+  final VoidCallback? onActionTap;
 
-  @override
-  State<OrderedProductCard> createState() => _OrderedProductCardState();
-}
+  // Data parameters
+  final String productName;
+  final String productDescription;
+  final String price;
+  final String quantity;
+  final String imagePath;
 
-class _OrderedProductCardState extends State<OrderedProductCard> {
+  const OrderedProductCard({
+    super.key,
+    this.isHistory = false,
+    this.showAction = true, // Default is true (Show the button)
+    this.onActionTap,
+    this.productName = "Coffee milk",
+    this.productDescription = "Ice, Regular, Normal Sugar, Normal Ice",
+    this.price = "Rp. 25.000",
+    this.quantity = "x1",
+    this.imagePath = "assets/images/home/products/product_image.png",
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 375.w,
       padding: EdgeInsets.all(16.w),
-      margin: EdgeInsets.symmetric(vertical: 8.h),
-      decoration: BoxDecoration(
+      // Margin adjusted: vertical only, let parent handle horizontal if needed
+      margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
         children: [
-          Stack(
-            alignment: Alignment.center,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 70.w,
-                width: 70.w,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color(0XFFF4F4F4),
-                ),
+              // --- Image Section ---
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    height: 70.w,
+                    width: 70.w,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0XFFF4F4F4),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: -4.w,
+                    child: Image.asset(
+                      imagePath,
+                      width: 85.w,
+                      height: 85.w,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ],
               ),
-              Positioned(
-                bottom: -4.w,
-                child: Image.asset(
-                  "assets/images/home/products/product_image.png",
-                  width: 85.w,
-                  height: 85.w,
-                  fit: BoxFit.contain,
+              SizedBox(width: 16.w),
+
+              // --- Details Section ---
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            productName,
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          price,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 4.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            productDescription,
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey[600],
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 8.w),
+                          child: Text(
+                            quantity,
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-          SizedBox(width: 16.w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+
+          // --- Conditional Bottom Section ---
+          // Only show this block if showAction is TRUE
+          if (showAction) ...[
+            SizedBox(height: 12.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "Coffee milk",
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
-                      ),
+                if (isHistory)
+                  Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.green),
+                      borderRadius: BorderRadius.circular(4.r),
                     ),
-                    Text(
-                      "Rp. 25.000",
+                    child: Text(
+                      "Success",
                       style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 4.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "Ice, Regular, Normal Sugar, Normal Ice",
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.grey[600],
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      ),
-                    ),
-                    Text(
-                      "x1",
-                      style: TextStyle(
-                        fontSize: 14.sp,
+                        color: Colors.green,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
-                        color: Colors.black,
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(height: 8.h),
+                  )
+                else
+                  const SizedBox.shrink(),
+                GestureDetector(
+                  onTap: onActionTap,
+                  child: Row(
+                    children: [
+                      Text(
+                        isHistory ? "Order Again" : "Tracking Order",
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
+                          color: const Color(0xFF6D4E43),
+                        ),
+                      ),
+                      SizedBox(width: 4.w),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 12.sp,
+                        color: const Color(0xFF6D4E43),
+                      )
+                    ],
+                  ),
+                )
               ],
-            ),
-          ),
+            )
+          ]
         ],
       ),
     );

@@ -60,4 +60,7 @@ abstract class AppStrings {
   static const String checkoutTitle = "Checkout";
 
   static const String trackOrderTitle = "Tracking Order";
+
+  static const String historyTab1 = "Process";
+  static const String historyTab2 = "Done";
 }

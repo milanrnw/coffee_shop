@@ -62,7 +62,9 @@ class _TrackingOrderScreenState extends State<TrackingOrderScreen> {
             thickness: 4.h,
             color: const Color(0xFFF4F4F4),
           ),
-          OrderedProductCard(),
+          OrderedProductCard(
+            showAction: false,
+          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
             child: GestureDetector(
