@@ -6,7 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
+  final int initialPage;
+  final int initialHistoryTab;
+  const DashboardScreen({
+    super.key,
+    this.initialPage = 0,
+    this.initialHistoryTab = 0,
+  });
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
@@ -14,12 +20,17 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   int bottomNavBarIndex = 0;
-
-  final List<Widget> pages = const [
-    HomeScreenSliver(),
-    HistoryScreen(),
-    AccountScreen(),
-  ];
+  late List<Widget> pages;
+  @override
+  void initState() {
+    super.initState();
+    bottomNavBarIndex = widget.initialPage;
+    pages = [
+      HomeScreenSliver(),
+      HistoryScreen(initialIndex: widget.initialHistoryTab),
+      AccountScreen(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {

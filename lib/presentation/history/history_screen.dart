@@ -1,12 +1,15 @@
 import 'package:coffee_shop/constants/app_colors.dart';
 import 'package:coffee_shop/constants/app_strings.dart';
 import 'package:coffee_shop/constants/app_text_styles.dart';
+import 'package:coffee_shop/presentation/checkout/checkout_screen.dart';
 import 'package:coffee_shop/presentation/track_order/ordered_product_card.dart';
+import 'package:coffee_shop/presentation/transaction/order_receipt_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HistoryScreen extends StatefulWidget {
-  const HistoryScreen({super.key});
+  final int initialIndex;
+  const HistoryScreen({super.key, this.initialIndex = 0});
 
   @override
   State<HistoryScreen> createState() => _HistoryScreenState();
@@ -20,7 +23,8 @@ class _HistoryScreenState extends State<HistoryScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(
+        length: 2, vsync: this, initialIndex: widget.initialIndex);
   }
 
   @override
@@ -88,7 +92,24 @@ class _HistoryScreenState extends State<HistoryScreen>
                       children: [
                         OrderedProductCard(
                           isHistory: true,
-                          onActionTap: () {},
+                          onActionTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => OrderReceiptScreen(
+                                  buttonText: "Order Again",
+                                  onButtonTap: () {
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const CheckoutScreen()),
+                                      (route) => false,
+                                    );
+                                  },
+                                ),
+                              ),
+                            );
+                          },
                         ),
                         SizedBox(
                           height: 16.h,

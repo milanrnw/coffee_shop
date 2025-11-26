@@ -4,7 +4,7 @@ class TransactionModel {
   final String time;
   final String productName;
   final String productOptions;
-  final String productImage;
+  final String? productImage;
   final int quantity;
   final double price;
   final double voucher;
@@ -18,7 +18,7 @@ class TransactionModel {
     required this.time,
     required this.productName,
     required this.productOptions,
-    required this.productImage,
+    this.productImage,
     required this.quantity,
     required this.price,
     required this.voucher,

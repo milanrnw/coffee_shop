@@ -3,10 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderedProductCard extends StatelessWidget {
   final bool isHistory;
-  final bool showAction; // <--- NEW PARAMETER
+  final bool showAction;
   final VoidCallback? onActionTap;
 
-  // Data parameters
   final String productName;
   final String productDescription;
   final String price;
@@ -16,7 +15,7 @@ class OrderedProductCard extends StatelessWidget {
   const OrderedProductCard({
     super.key,
     this.isHistory = false,
-    this.showAction = true, // Default is true (Show the button)
+    this.showAction = true,
     this.onActionTap,
     this.productName = "Coffee milk",
     this.productDescription = "Ice, Regular, Normal Sugar, Normal Ice",
@@ -30,7 +29,6 @@ class OrderedProductCard extends StatelessWidget {
     return Container(
       width: 375.w,
       padding: EdgeInsets.all(16.w),
-      // Margin adjusted: vertical only, let parent handle horizontal if needed
       margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -40,7 +38,6 @@ class OrderedProductCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // --- Image Section ---
               Stack(
                 alignment: Alignment.center,
                 children: [
@@ -64,8 +61,6 @@ class OrderedProductCard extends StatelessWidget {
                 ],
               ),
               SizedBox(width: 16.w),
-
-              // --- Details Section ---
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,9 +124,6 @@ class OrderedProductCard extends StatelessWidget {
               ),
             ],
           ),
-
-          // --- Conditional Bottom Section ---
-          // Only show this block if showAction is TRUE
           if (showAction) ...[
             SizedBox(height: 12.h),
             Row(

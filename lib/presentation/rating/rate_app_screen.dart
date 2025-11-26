@@ -1,5 +1,6 @@
 import 'package:coffee_shop/constants/app_colors.dart';
 import 'package:coffee_shop/constants/app_text_styles.dart';
+import 'package:coffee_shop/dashboard/dashboard_screen.dart';
 import 'package:coffee_shop/presentation/custom_widgets/auth_button.dart';
 import 'package:coffee_shop/presentation/rating/common_rating_bar.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,17 @@ class _RateAppScreenState extends State<RateAppScreen> {
         leading: IconButton(
             iconSize: 24.sp,
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => const DashboardScreen(
+                    initialPage: 1,
+                    initialHistoryTab: 0,
+                  ),
+                ),
+                (route) => false,
+              );
+            },
             icon: const Icon(Icons.close)),
         title: Text(
           "Rating and Review",
@@ -132,7 +143,17 @@ class _RateAppScreenState extends State<RateAppScreen> {
                   SizedBox(height: 84.h),
                   AuthButton(
                     buttonText: "Send a review",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (context) => const DashboardScreen(
+                            initialPage: 1,
+                            initialHistoryTab: 1,
+                          ),
+                        ),
+                        (route) => false,
+                      );
+                    },
                     buttonColor: AppColors.brandColor,
                   )
                 ],

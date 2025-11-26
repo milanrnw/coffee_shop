@@ -8,26 +8,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderReceiptScreen extends StatefulWidget {
-  const OrderReceiptScreen({super.key});
+  final String? buttonText;
+  final VoidCallback? onButtonTap;
+
+  const OrderReceiptScreen({super.key, this.buttonText, this.onButtonTap});
 
   @override
   State<OrderReceiptScreen> createState() => _OrderReceiptScreenState();
 }
 
 class _OrderReceiptScreenState extends State<OrderReceiptScreen> {
+  void _handleBackNavigation() {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const HomeScreen(),
+      ),
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
         if (didPop) return;
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HomeScreen(),
-          ),
-          (route) => false,
-        );
+        _handleBackNavigation();
       },
       child: Scaffold(
         backgroundColor: const Color(0XFFFEFEFE),
@@ -39,15 +46,7 @@ class _OrderReceiptScreenState extends State<OrderReceiptScreen> {
             iconSize: 24.sp,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
-                ),
-                (route) => false,
-              );
-            },
+            onPressed: _handleBackNavigation,
           ),
           title: Text(
             "Receipt Order",
@@ -72,7 +71,6 @@ class _OrderReceiptScreenState extends State<OrderReceiptScreen> {
                 time: "04:13 PM",
                 productName: "Coffee Milk",
                 productOptions: "Ice, Regular, Normal Sugar, Normal Ice",
-                productImage: "assets/dummy_image.png",
                 quantity: 1,
                 price: 25.000,
                 voucher: 0,
@@ -81,17 +79,19 @@ class _OrderReceiptScreenState extends State<OrderReceiptScreen> {
                 schedulePickUpTime: "05.15 PM",
               ),
             ),
-            SizedBox(
-              height: 32.h,
-            ),
+            SizedBox(height: 32.h),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const TrackingOrderScreen(),
-                  ),
-                );
+                if (widget.onButtonTap != null) {
+                  widget.onButtonTap!();
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TrackingOrderScreen(),
+                    ),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.brandColor,
@@ -102,7 +102,7 @@ class _OrderReceiptScreenState extends State<OrderReceiptScreen> {
                 ),
               ),
               child: Text(
-                "Tracking Order",
+                widget.buttonText ?? "Track Order",
                 style: AppTextStyles.authButton,
               ),
             ),
