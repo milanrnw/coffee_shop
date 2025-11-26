@@ -1,4 +1,5 @@
 import 'package:coffee_shop/constants/app_colors.dart';
+import 'package:coffee_shop/presentation/checkout/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -49,27 +50,33 @@ class TotalAmountTile extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            height: 48.h,
-            width: 132.w,
-            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-            decoration: BoxDecoration(
-              color: AppColors.brandColor,
-              border: Border.all(
+          InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CheckoutScreen()));
+            },
+            child: Container(
+              height: 48.h,
+              width: 132.w,
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+              decoration: BoxDecoration(
                 color: AppColors.brandColor,
-              ),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Center(
-              child: Text(
-                "Add Order",
-                style: TextStyle(
-                  color: AppColors.brandColor50,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
+                border: Border.all(
+                  color: AppColors.brandColor,
                 ),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Center(
+                child: Text(
+                  "Add Order",
+                  style: TextStyle(
+                    color: AppColors.brandColor50,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ),
           ),

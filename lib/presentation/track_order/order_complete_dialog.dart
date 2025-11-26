@@ -2,8 +2,23 @@ import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class OrderCompleteDialog extends StatelessWidget {
+class OrderCompleteDialog extends StatefulWidget {
   const OrderCompleteDialog({super.key});
+
+  @override
+  State<OrderCompleteDialog> createState() => _OrderCompleteDialogState();
+}
+
+class _OrderCompleteDialogState extends State<OrderCompleteDialog> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) {
+        Navigator.of(context).pop();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

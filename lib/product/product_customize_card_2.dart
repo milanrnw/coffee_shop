@@ -8,17 +8,15 @@ class ProductCustomizeCard2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonCardWidget(
-      title: "Customize Your Coffee",  // Optional title
-      description: "Choose your preferences",  // Optional description
+      title: "Customize Your Coffee",
+      description: "Choose your preferences",
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Your customization widgets go here, for example:
           Text("Option 1"),
           SizedBox(height: 8.h),
           Text("Option 2"),
           SizedBox(height: 8.h),
-          // Add more customization widgets or options here
         ],
       ),
     );

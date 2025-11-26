@@ -20,17 +20,15 @@ class _TrackingOrderScreenState extends State<TrackingOrderScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 2600), () async {
+    Future.delayed(const Duration(milliseconds: 2600), () {
       if (!mounted) return;
+      if (ModalRoute.of(context)?.isCurrent != true) return;
+
       showDialog(
         context: context,
         barrierDismissible: true,
         builder: (context) => const OrderCompleteDialog(),
       );
-      await Future.delayed(const Duration(seconds: 3));
-      if (mounted && Navigator.canPop(context)) {
-        Navigator.pop(context);
-      }
     });
   }
 

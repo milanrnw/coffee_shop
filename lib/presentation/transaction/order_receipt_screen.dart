@@ -1,7 +1,7 @@
 import 'package:coffee_shop/constants/app_colors.dart';
 import 'package:coffee_shop/constants/app_text_styles.dart';
+import 'package:coffee_shop/dashboard/dashboard_screen.dart';
 import 'package:coffee_shop/model/transaction_model.dart';
-import 'package:coffee_shop/presentation/home/home_screen.dart';
 import 'package:coffee_shop/presentation/track_order/tracking_order_screen.dart';
 import 'package:coffee_shop/presentation/transaction/transaction_detail_card.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class _OrderReceiptScreenState extends State<OrderReceiptScreen> {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
-        builder: (context) => const HomeScreen(),
+        builder: (context) => const DashboardScreen(),
       ),
       (route) => false,
     );
