@@ -64,7 +64,6 @@ class _ProductCustomizeCardState extends State<ProductCustomizeCard> {
             ),
             SizedBox(height: 10.h),
 
-            // Variant
             Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -130,7 +129,6 @@ class _ProductCustomizeCardState extends State<ProductCustomizeCard> {
             ),
             SizedBox(height: 12.h),
 
-            // Sugar
             Row(
               children: [
                 Text(

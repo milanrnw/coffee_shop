@@ -2,13 +2,14 @@ import 'package:coffee_shop/model/pills_model.dart';
 import 'package:coffee_shop/model/product_items_model.dart';
 import 'package:coffee_shop/presentation/custom_widgets/pills.dart';
 import 'package:coffee_shop/presentation/custom_widgets/product_tile.dart';
+import 'package:coffee_shop/product/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CoffeeTabSliver extends StatefulWidget {
-  const CoffeeTabSliver({super.key,this.controller});
+  const CoffeeTabSliver({super.key, this.controller});
 
-   final ScrollController? controller;
+  final ScrollController? controller;
 
   @override
   State<CoffeeTabSliver> createState() => _CoffeeTabSliverState();
@@ -20,15 +21,14 @@ final productItemData = [
       productLabel: "Coffee Milk",
       productDescription: "ice americano + fresh milk",
       productPrice: 25.000,
+      productOriginalPrice: 25.000,
       productRatings: 4.9),
-      
   ProductItemsModel(
       productImage: "assets/images/home/products/item_2.png",
       productLabel: "Cocoa Caramel Latte",
       productDescription: "streamed milk with mocha and caramel sauces",
       productPrice: 35.500,
       productRatings: 4.6),
-      
   ProductItemsModel(
       productImage: "assets/images/home/products/item_3.png",
       productLabel: "Nitro Cold Brew",
@@ -36,15 +36,12 @@ final productItemData = [
           "cold brew with nitrogen without sugar, velvety crema.",
       productPrice: 31.000,
       productRatings: 4.4),
-
   ProductItemsModel(
       productImage: "assets/images/home/products/item_4.png",
       productLabel: "Caffe Mocha",
-      productDescription:
-          "Espresso with mocha sause, milk and whipped cream",
+      productDescription: "Espresso with mocha sause, milk and whipped cream",
       productPrice: 29.000,
       productRatings: 4.7),
-
   ProductItemsModel(
       productImage: "assets/images/home/products/item_3.png",
       productLabel: "Nitro Cold Brew",
@@ -52,29 +49,24 @@ final productItemData = [
           "cold brew with nitrogen without sugar, velvety crema.",
       productPrice: 31.000,
       productRatings: 4.4),
-
   ProductItemsModel(
       productImage: "assets/images/home/products/item_4.png",
       productLabel: "Caffe Mocha",
-      productDescription:
-          "Espresso with mocha sause, milk and whipped cream",
+      productDescription: "Espresso with mocha sause, milk and whipped cream",
       productPrice: 29.000,
       productRatings: 4.7),
-
-      ProductItemsModel(
+  ProductItemsModel(
       productImage: "assets/images/home/products/item_1.png",
       productLabel: "Coffee Milk",
       productDescription: "ice americano + fresh milk",
       productPrice: 25.000,
       productRatings: 4.9),
-      
   ProductItemsModel(
       productImage: "assets/images/home/products/item_2.png",
       productLabel: "Cocoa Caramel Latte",
       productDescription: "streamed milk with mocha and caramel sauces",
       productPrice: 35.500,
       productRatings: 4.6),
-      
   ProductItemsModel(
       productImage: "assets/images/home/products/item_3.png",
       productLabel: "Nitro Cold Brew",
@@ -82,15 +74,12 @@ final productItemData = [
           "cold brew with nitrogen without sugar, velvety crema.",
       productPrice: 31.000,
       productRatings: 4.4),
-
   ProductItemsModel(
       productImage: "assets/images/home/products/item_4.png",
       productLabel: "Caffe Mocha",
-      productDescription:
-          "Espresso with mocha sause, milk and whipped cream",
+      productDescription: "Espresso with mocha sause, milk and whipped cream",
       productPrice: 29.000,
       productRatings: 4.7),
-
   ProductItemsModel(
       productImage: "assets/images/home/products/item_3.png",
       productLabel: "Nitro Cold Brew",
@@ -98,14 +87,12 @@ final productItemData = [
           "cold brew with nitrogen without sugar, velvety crema.",
       productPrice: 31.000,
       productRatings: 4.4),
-
   ProductItemsModel(
       productImage: "assets/images/home/products/item_4.png",
       productLabel: "Caffe Mocha",
-      productDescription:
-          "Espresso with mocha sause, milk and whipped cream",
+      productDescription: "Espresso with mocha sause, milk and whipped cream",
       productPrice: 29.000,
-      productRatings: 4.7),      
+      productRatings: 4.7),
 ];
 
 List<PillsModel> pillsList = [
@@ -132,27 +119,52 @@ class _CoffeeTabSliverState extends State<CoffeeTabSliver> {
               physics: const ClampingScrollPhysics(),
               itemCount: pillsList.length,
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => Pills(onTap: () {
-                pillsList[index].isSelected = !pillsList[index].isSelected;
-              setState(() {});
-              },
-              pillData: pillsList[index],
+              itemBuilder: (context, index) => Pills(
+                onTap: () {
+                  pillsList[index].isSelected = !pillsList[index].isSelected;
+                  setState(() {});
+                },
+                pillData: pillsList[index],
               ),
             ),
           ),
           SizedBox(height: 4.h),
           SizedBox(
             child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => ProductTile(
-                  productRatings: productItemData[index].productRatings,
-                  productlabel: productItemData[index].productLabel,
-                  productDescription: productItemData[index].productDescription,
-                  productImage: productItemData[index].productImage,
-                  originalPrice: productItemData[index].productPrice, // dynamic price not showing
-              ),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: productItemData.length,
               shrinkWrap: true,
+              itemBuilder: (context, index) {
+                final product = productItemData[index];
+
+                if (index == 0) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductScreen(),
+                        ),
+                      );
+                    },
+                    child: ProductTile(
+                      productRatings: product.productRatings,
+                      productlabel: product.productLabel,
+                      productDescription: product.productDescription,
+                      productImage: product.productImage,
+                      originalPrice: product.productPrice,
+                    ),
+                  );
+                }
+
+                return ProductTile(
+                  productRatings: product.productRatings,
+                  productlabel: product.productLabel,
+                  productDescription: product.productDescription,
+                  productImage: product.productImage,
+                  originalPrice: product.productPrice,
+                );
+              },
             ),
           ),
         ],

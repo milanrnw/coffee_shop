@@ -33,7 +33,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             child: SingleChildScrollView(
               physics: ClampingScrollPhysics(),
               child: Column(
-                //mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 103.h),
@@ -65,7 +64,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             builder: (context) => SendOtpCodePopup());
                       }),
                   SizedBox(height: 183.h),
-
                   AuthScreenFooterText(
                       initialText: AppStrings.registerFooterText,
                       linkText: AppStrings.registerLinkText,

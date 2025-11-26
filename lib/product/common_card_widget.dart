@@ -9,9 +9,9 @@ class CommonCardWidget extends StatelessWidget {
     this.description,
   }) : super(key: key);
 
-  final Widget child; // The main content for the card (either text, buttons, etc.)
-  final String? title; // Optional title
-  final String? description; // Optional description
+  final Widget child;
+  final String? title;
+  final String? description;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class CommonCardWidget extends StatelessWidget {
                   ),
                 ),
               SizedBox(height: 8.h),
-              child,  // Here the content (like QuantityAdjust or customization options) goes.
+              child,
             ],
           ),
         ),

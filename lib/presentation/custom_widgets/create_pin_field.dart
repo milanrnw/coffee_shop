@@ -9,14 +9,11 @@ class CreatePinField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return PinCodeTextField(
-      //backgroundColor: Colors.amber,
       obscureText: true,
       animationType: AnimationType.fade,
       textInputAction: TextInputAction.done,
       pinTheme: PinTheme(
-        //fieldOuterPadding: EdgeInsets.only(right: 20),
         inActiveBoxShadow: [
           BoxShadow(
             blurRadius: 4,
@@ -46,7 +43,6 @@ class CreatePinField extends StatelessWidget {
         selectedFillColor: Colors.transparent,
         selectedColor: Color(0XFF868686),
       ),
-      //mainAxisAlignment: MainAxisAlignment.center,
       autoFocus: false,
       enableActiveFill: true,
       autoDismissKeyboard: true,

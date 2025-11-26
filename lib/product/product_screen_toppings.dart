@@ -44,7 +44,7 @@ class _ProductScreenToppingsState extends State<ProductScreenToppings> {
             SizedBox(height: 8.h),
             for (int i = 0; i < toppings.length; i++) ...[
               Container(
-                padding: EdgeInsets.symmetric(vertical: 4.h), // Reduced padding
+                padding: EdgeInsets.symmetric(vertical: 4.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -64,7 +64,8 @@ class _ProductScreenToppingsState extends State<ProductScreenToppings> {
                         color: AppColors.textColorHeading,
                       ),
                     ),
-                    Checkbox(activeColor: AppColors.brandColor,
+                    Checkbox(
+                      activeColor: AppColors.brandColor,
                       value: toppingsValues[i],
                       onChanged: (value) {
                         setState(() {
@@ -76,7 +77,6 @@ class _ProductScreenToppingsState extends State<ProductScreenToppings> {
                   ],
                 ),
               ),
-              // Add SizedBox between items, except after the last one
               if (i != toppings.length - 1) SizedBox(height: 0),
             ]
           ],

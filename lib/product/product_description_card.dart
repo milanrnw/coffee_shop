@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ProductDescriptionCard extends StatefulWidget {
   const ProductDescriptionCard({super.key, required this.onQuantityChanged});
 
-  final Function(int) onQuantityChanged;  // Callback function
+  final Function(int) onQuantityChanged;
 
   @override
   State<ProductDescriptionCard> createState() => _ProductDescriptionCardState();
@@ -17,7 +17,8 @@ class _ProductDescriptionCardState extends State<ProductDescriptionCard> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Align(alignment: Alignment.center,
+      child: Align(
+        alignment: Alignment.center,
         child: Container(
           width: 0.9.sw,
           padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
@@ -73,7 +74,7 @@ class _ProductDescriptionCardState extends State<ProductDescriptionCard> {
                   ),
                   QuantityAdjust(
                     quantity: 1,
-                    onQuantityChanged: widget.onQuantityChanged,  // Pass the callback here
+                    onQuantityChanged: widget.onQuantityChanged,
                   ),
                 ],
               ),

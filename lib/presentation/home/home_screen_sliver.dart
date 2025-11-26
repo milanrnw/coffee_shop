@@ -39,7 +39,6 @@ class _HomeScreenSliverState extends State<HomeScreenSliver>
       body: SafeArea(
           child: CustomScrollView(
         controller: _controller,
-        //physics: const ClampingScrollPhysics(),
         slivers: [
           SliverAppBar(
             elevation: 0,

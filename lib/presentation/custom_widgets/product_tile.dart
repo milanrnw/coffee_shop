@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductTile extends StatefulWidget {
-  const ProductTile(
-      {super.key,
-      this.originalPrice = 0,
-      required this.productlabel,
-      required this.productDescription,
-      required this.productImage,
-      required this.productRatings,});
+  const ProductTile({
+    super.key,
+    this.originalPrice = 0,
+    required this.productlabel,
+    required this.productDescription,
+    required this.productImage,
+    required this.productRatings,
+  });
 
   final double? originalPrice;
   final String productDescription;
@@ -31,7 +32,7 @@ class _ProductTileState extends State<ProductTile> {
 
     return Container(
       height: 69.h,
-      width: screenWidth, //use flutterscreenutil
+      width: screenWidth,
       padding: const EdgeInsets.symmetric(vertical: 0.01),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,10 +48,11 @@ class _ProductTileState extends State<ProductTile> {
                   Container(
                     height: 69.h,
                     width: 66.w,
-                    decoration:  BoxDecoration(
+                    decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(
-                            widget.productImage,),
+                          widget.productImage,
+                        ),
                       ),
                       shape: BoxShape.circle,
                       color: Color(0XFFF4F4F4),
@@ -74,8 +76,7 @@ class _ProductTileState extends State<ProductTile> {
                     SizedBox(height: 8.h),
                     Flexible(
                       child: LayoutBuilder(
-                        builder: (context, constraints)
-                            {
+                        builder: (context, constraints) {
                           final span = TextSpan(
                             text: widget.productDescription,
                             style: AppTextStyles.productDescriptionText,
@@ -90,7 +91,6 @@ class _ProductTileState extends State<ProductTile> {
                           tp.layout(maxWidth: constraints.maxWidth - 10);
                           final numLines = tp.computeLineMetrics().length;
 
-                          // Update once only if changed
                           if (numLines != (isTwoLines ? 2 : 1)) {
                             WidgetsBinding.instance.addPostFrameCallback((_) {
                               setState(() {
@@ -116,10 +116,8 @@ class _ProductTileState extends State<ProductTile> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                 widget.originalPrice.toString(),
-                  style: AppTextStyles.salePrice
-                ),
+                Text(widget.originalPrice.toString(),
+                    style: AppTextStyles.salePrice),
                 SizedBox(height: widget.originalPrice != null ? 8 : 4),
                 isTwoLines
                     ? Text(

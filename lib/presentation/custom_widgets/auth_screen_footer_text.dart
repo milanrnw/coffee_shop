@@ -28,7 +28,7 @@ class AuthScreenFooterText extends StatelessWidget {
               text: initialText,
               style: TextStyle(
                 fontSize: 14.sp,
-                color: initialTextColor ?? const Color(0XFF555555), //how to use this in App.styles.
+                color: initialTextColor ?? const Color(0XFF555555),
               ),
             ),
             TextSpan(

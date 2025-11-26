@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class OnboardingMain extends StatelessWidget {
   OnboardingMain({super.key});
 
-  final /* (variable name) */ onboardingSlideData = [
+  final onboardingSlideData = [
     OnboardingModel(
       imageurl: 'assets/images/onboarding/slide1.png',
       labeltext: "Choose and customize your Drinks",
@@ -46,7 +46,7 @@ class OnboardingMain extends StatelessWidget {
               controller: pagecontroller,
               itemCount: onboardingSlideData.length,
               itemBuilder: (context, index) => OnboardingSlideData(
-                  onboardingData:onboardingSlideData[index] ,
+                  onboardingData: onboardingSlideData[index],
                   slidelength: onboardingSlideData.length,
                   currentindex: index,
                   ontapbutton: () {
@@ -63,9 +63,7 @@ class OnboardingMain extends StatelessWidget {
                     pagecontroller.nextPage(
                         duration: Duration(milliseconds: 300),
                         curve: Curves.ease);
-                  }
-                  )
-                  ),
+                  })),
         ),
       ),
     );

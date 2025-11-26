@@ -237,5 +237,5 @@ abstract class AppTextStyles {
     color: AppColors.textColorHeading,
   );
 
-  static TextStyle? get checkoutPayNowButton => null;
+  //static TextStyle? get checkoutPayNowButton => null;
 }
