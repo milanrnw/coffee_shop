@@ -73,6 +73,7 @@ flutter:
     - assets/images/home/carousel/
     - assets/images/home/products/
     - assets/images/voucher/
+    - assets/images/payment/
     - assets/gif/
     - assets/icons/
     

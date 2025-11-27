@@ -3,6 +3,7 @@ import 'package:coffee_shop/model/voucher_model.dart';
 import 'package:coffee_shop/presentation/checkout/pickup_time_dialog.dart';
 import 'package:coffee_shop/presentation/checkout/voucher_model_list.dart';
 import 'package:coffee_shop/presentation/checkout/voucher_screen.dart';
+import 'package:coffee_shop/presentation/payment/payment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -95,13 +96,21 @@ class _CheckoutDetailState extends State<CheckoutDetail> {
               Divider(thickness: 2.h, color: const Color(0xFFF4F4F4)),
               Text("Payment Method", style: _titleStyle),
               SizedBox(height: 8.h),
-              Row(
-                children: [
-                  Text("Gopay(Rp85.000)", style: _subtitleStyle),
-                  const Spacer(),
-                  Icon(Icons.arrow_forward_ios,
-                      size: 20.sp, color: Colors.black54),
-                ],
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PaymentScreen()),
+                  );
+                },
+                child: Row(
+                  children: [
+                    Text("Gopay(Rp85.000)", style: _subtitleStyle),
+                    const Spacer(),
+                    Icon(Icons.arrow_forward_ios,
+                        size: 20.sp, color: Colors.black54),
+                  ],
+                ),
               ),
               SizedBox(height: 8.h),
               Divider(thickness: 2.h, color: const Color(0xFFF4F4F4)),
