@@ -13,7 +13,6 @@ class SearchBar extends StatelessWidget {
         const Expanded(
           child: SearchTextField(),
         ),
-        const SizedBox(width: 20),
         SvgPicture.asset("assets/icons/bell_icon.svg"),
       ],
     );

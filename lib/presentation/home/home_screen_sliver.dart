@@ -41,6 +41,7 @@ class _HomeScreenSliverState extends State<HomeScreenSliver>
         controller: _controller,
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             elevation: 0,
             scrolledUnderElevation: 0,
             surfaceTintColor: Colors.transparent,

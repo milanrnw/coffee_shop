@@ -2,6 +2,7 @@ import 'package:coffee_shop/model/onboarding_model.dart';
 import 'package:coffee_shop/presentation/authentication/login_screen.dart';
 import 'package:coffee_shop/presentation/onboarding/onboarding_slide_data.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingMain extends StatelessWidget {
   OnboardingMain({super.key});
@@ -49,7 +50,9 @@ class OnboardingMain extends StatelessWidget {
                   onboardingData: onboardingSlideData[index],
                   slidelength: onboardingSlideData.length,
                   currentindex: index,
-                  ontapbutton: () {
+                  ontapbutton: () async {
+                    final prefs = await SharedPreferences.getInstance();
+                    await prefs.setBool('seenOnboarding', true);
                     if (index == (onboardingSlideData.length - 1)) {
                       Navigator.pushAndRemoveUntil(
                         context,

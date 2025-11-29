@@ -14,36 +14,40 @@ class _SearchTextFieldState extends State<SearchTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 294.w,
-      height: 40.h,
-      child: TextField(
-        controller: TextEditingController(),
-        style: AppTextStyles.searchTextFieldText,
-        cursorColor: Color(0XFF8A8A8A),
-        cursorHeight: 16.h,
-        cursorErrorColor: Colors.red,
-        decoration: InputDecoration(
-            suffixIcon: Icon(
-              Icons.search,
-              size: 24.r,
-            ),
-            suffixIconColor: Color(0XFFCACACA),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 2,
-                color: Color(0XFFD7CCC8),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: SizedBox(
+        width: 294.w,
+        height: 40.h,
+        child: TextField(
+          controller: TextEditingController(),
+          style: AppTextStyles.searchTextFieldText,
+          cursorColor: Color(0XFF8A8A8A),
+          cursorHeight: 16.h,
+          cursorErrorColor: Colors.red,
+          decoration: InputDecoration(
+              suffixIcon: Icon(
+                Icons.search,
+                size: 24.r,
               ),
-              borderRadius: BorderRadius.circular(16.r),
-            ),
-            hintText: "What would you like to drink today?",
-            hintStyle: AppTextStyles.searchTextFieldHintText,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 2,color: Color(0XFFD7CCC8),
+              suffixIconColor: Color(0XFFCACACA),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  width: 2,
+                  color: Color(0XFFD7CCC8),
+                ),
+                borderRadius: BorderRadius.circular(16.r),
               ),
-              borderRadius: BorderRadius.circular(16.r),
-            )),
+              hintText: "What would you like to drink today?",
+              hintStyle: AppTextStyles.sendOtpPopupDescription1,
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  width: 2,
+                  color: Color(0XFFD7CCC8),
+                ),
+                borderRadius: BorderRadius.circular(16.r),
+              )),
+        ),
       ),
     );
   }
