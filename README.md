@@ -47,13 +47,13 @@ Experience a robust feature set crafted for performance and usability:
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="assets/screenshots/Walkthrough_1.png" width="300" alt="Walkthrough_1">
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="assets/screenshots/Walkthrough_2.png" width="300" alt="Walkthrough_2">
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="assets/screenshots/Walkthrough_3.png" width="300" alt="Walkthrough_3">
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="assets/screenshots/Walkthrough_4.png" width="300" alt="Walkthrough_4">
+  <img src="assets/screenshots/Walkthrough_1.png" width="100%" alt="Walkthrough Part 1">
+  <br><br>
+  <img src="assets/screenshots/Walkthrough_2.png" width="100%" alt="Walkthrough Part 2">
+  <br><br>
+  <img src="assets/screenshots/Walkthrough_3.png" width="100%" alt="Walkthrough Part 3">
+  <br><br>
+  <img src="assets/screenshots/Walkthrough_4.png" width="100%" alt="Walkthrough Part 4">
 </p>
 
 ---
