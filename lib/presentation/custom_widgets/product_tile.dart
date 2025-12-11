@@ -116,7 +116,7 @@ class _ProductTileState extends State<ProductTile> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.originalPrice.toString(),
+                Text('Rp ${(widget.originalPrice ?? 0).toStringAsFixed(3)}',
                     style: AppTextStyles.salePrice),
                 SizedBox(height: widget.originalPrice != null ? 8 : 4),
                 isTwoLines

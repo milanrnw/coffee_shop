@@ -132,15 +132,15 @@ class TransactionDetailCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 8.h),
-                _buildRow("Price", "Rp${data.price.toStringAsFixed(0)}"),
+                _buildRow("Price", "Rp${data.price.toStringAsFixed(3)}"),
                 SizedBox(height: 4.h),
                 _buildRow(
                     "Voucher",
                     data.voucher == 0
                         ? "0"
-                        : "-Rp${data.voucher.toStringAsFixed(0)}"),
+                        : "-Rp${data.voucher.toStringAsFixed(3)}"),
                 SizedBox(height: 4.h),
-                _buildRow("Total", "Rp${data.total.toStringAsFixed(0)}",
+                _buildRow("Total", "Rp${data.total.toStringAsFixed(3)}",
                     isBold: true),
                 SizedBox(height: 16.h),
                 _buildRow("Payment Method", data.paymentMethod),
