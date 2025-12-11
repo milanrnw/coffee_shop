@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TotalAmountTile extends StatelessWidget {
-  const TotalAmountTile({super.key, this.onAddOrder});
+  const TotalAmountTile({super.key, this.onAddOrder, required this.price});
 
   final VoidCallback? onAddOrder;
+  final double price;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class TotalAmountTile extends StatelessWidget {
                       color: AppColors.textColorParagraph),
                 ),
                 Text(
-                  "Rp.25.000",
+                  "Rp${price.toStringAsFixed(3)}",
                   style: TextStyle(
                     color: AppColors.textColorHeading,
                     fontSize: 18.sp,

@@ -1,12 +1,18 @@
 import 'package:coffee_shop/constants/app_colors.dart';
+import 'package:coffee_shop/model/product_items_model.dart';
 import 'package:coffee_shop/presentation/custom_widgets/quantity_adjust.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductDescriptionCard extends StatefulWidget {
-  const ProductDescriptionCard({super.key, required this.onQuantityChanged});
+  const ProductDescriptionCard({
+    super.key,
+    required this.onQuantityChanged,
+    required this.product,
+  });
 
   final Function(int) onQuantityChanged;
+  final ProductItemsModel product;
 
   @override
   State<ProductDescriptionCard> createState() => _ProductDescriptionCardState();
@@ -43,7 +49,7 @@ class _ProductDescriptionCardState extends State<ProductDescriptionCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Coffee milk",
+                    widget.product.productLabel,
                     style: TextStyle(
                       color: AppColors.textColorHeading,
                       fontSize: 18.sp,
@@ -51,7 +57,7 @@ class _ProductDescriptionCardState extends State<ProductDescriptionCard> {
                     ),
                   ),
                   Text(
-                    "Rp25.000",
+                    "Rp${widget.product.productPrice.toStringAsFixed(3)}",
                     style: TextStyle(
                       color: AppColors.textColorHeading,
                       fontSize: 18.sp,
@@ -64,12 +70,15 @@ class _ProductDescriptionCardState extends State<ProductDescriptionCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Ice americano + fresh milk",
-                    style: TextStyle(
-                      color: AppColors.textColorParagraph,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
+                  Flexible(
+                    child: Text(
+                      widget.product.productDescription,
+                      style: TextStyle(
+                        color: AppColors.textColorParagraph,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   QuantityAdjust(
@@ -83,7 +92,7 @@ class _ProductDescriptionCardState extends State<ProductDescriptionCard> {
                 children: [
                   Icon(Icons.star, color: Colors.yellow),
                   Text(
-                    "4.9",
+                    widget.product.productRatings.toString(),
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.bold,

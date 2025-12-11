@@ -25,16 +25,26 @@ class CheckoutDetail extends StatefulWidget {
     required this.discountAmount,
     required this.total,
     required this.quantity,
+    required this.paymentMethod,
+    required this.orderType,
+    required this.scheduledTime,
+    required this.onPaymentMethodChanged,
+    required this.onOrderTypeChanged,
+    required this.onScheduledTimeChanged,
   });
+
+  final String paymentMethod;
+  final OrderType orderType;
+  final String scheduledTime;
+  final Function(String) onPaymentMethodChanged;
+  final Function(OrderType) onOrderTypeChanged;
+  final Function(String) onScheduledTimeChanged;
 
   @override
   State<CheckoutDetail> createState() => _CheckoutDetailState();
 }
 
 class _CheckoutDetailState extends State<CheckoutDetail> {
-  OrderType _selectedOrderType = OrderType.asap;
-  String _scheduledTime = "Schedule Pick Up";
-
   final TextStyle _titleStyle = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeight.w700,
@@ -48,9 +58,7 @@ class _CheckoutDetailState extends State<CheckoutDetail> {
   );
 
   void _handleSelection(OrderType value) async {
-    setState(() {
-      _selectedOrderType = value;
-    });
+    widget.onOrderTypeChanged(value);
 
     if (value == OrderType.later) {
       final result = await showDialog(
@@ -59,9 +67,7 @@ class _CheckoutDetailState extends State<CheckoutDetail> {
       );
 
       if (result != null) {
-        setState(() {
-          _scheduledTime = result;
-        });
+        widget.onScheduledTimeChanged(result);
       }
     }
   }
@@ -88,8 +94,8 @@ class _CheckoutDetailState extends State<CheckoutDetail> {
               Divider(thickness: 2.h, color: const Color(0xFFF4F4F4)),
               _buildRadioOption(
                 title: "Later",
-                subtitle: _selectedOrderType == OrderType.later
-                    ? _scheduledTime
+                subtitle: widget.orderType == OrderType.later
+                    ? widget.scheduledTime
                     : "Schedule Pick Up",
                 value: OrderType.later,
               ),
@@ -97,15 +103,18 @@ class _CheckoutDetailState extends State<CheckoutDetail> {
               Text("Payment Method", style: _titleStyle),
               SizedBox(height: 8.h),
               InkWell(
-                onTap: () {
-                  Navigator.push(
+                onTap: () async {
+                  final result = await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => PaymentScreen()),
                   );
+                  if (result != null) {
+                    widget.onPaymentMethodChanged(result);
+                  }
                 },
                 child: Row(
                   children: [
-                    Text("Gopay(Rp85.000)", style: _subtitleStyle),
+                    Text(widget.paymentMethod, style: _subtitleStyle),
                     const Spacer(),
                     Icon(Icons.arrow_forward_ios,
                         size: 20.sp, color: Colors.black54),
@@ -236,7 +245,7 @@ class _CheckoutDetailState extends State<CheckoutDetail> {
             ),
             Radio<OrderType>(
               value: value,
-              groupValue: _selectedOrderType,
+              groupValue: widget.orderType,
               onChanged: (val) => _handleSelection(val!),
               activeColor: AppColors.brandColor,
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

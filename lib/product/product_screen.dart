@@ -1,4 +1,5 @@
 import 'package:coffee_shop/constants/app_colors.dart';
+import 'package:coffee_shop/model/product_items_model.dart';
 import 'package:coffee_shop/presentation/custom_widgets/notes_section.dart';
 import 'package:coffee_shop/product/product_customize_card.dart';
 import 'package:coffee_shop/product/product_description_card.dart';
@@ -8,7 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductScreen extends StatefulWidget {
-  const ProductScreen({super.key});
+  const ProductScreen({super.key, required this.product});
+
+  final ProductItemsModel product;
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -16,10 +19,17 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   int _quantity = 1;
+  double _toppingsPrice = 0;
 
   void _updateQuantity(int newQuantity) {
     setState(() {
       _quantity = newQuantity;
+    });
+  }
+
+  void _updateToppingsPrice(double price) {
+    setState(() {
+      _toppingsPrice = price;
     });
   }
 
@@ -63,6 +73,7 @@ class _ProductScreenState extends State<ProductScreen> {
                             padding: EdgeInsets.only(top: 330),
                             child: ProductDescriptionCard(
                               onQuantityChanged: _updateQuantity,
+                              product: widget.product,
                             ),
                           ),
                         ),
@@ -71,7 +82,9 @@ class _ProductScreenState extends State<ProductScreen> {
                     SizedBox(height: 8.h),
                     ProductCustomizeCard(),
                     SizedBox(height: 8.h),
-                    ProductScreenToppings(),
+                    ProductScreenToppings(
+                      onToppingsTotalChanged: _updateToppingsPrice,
+                    ),
                     SizedBox(height: 8.h),
                     NotesSection(),
                     SizedBox(height: 8.h),
@@ -80,8 +93,11 @@ class _ProductScreenState extends State<ProductScreen> {
               ),
             ),
             TotalAmountTile(
+              price: (widget.product.productPrice + _toppingsPrice) * _quantity,
               onAddOrder: () {
-                Navigator.pop(context, true);
+                double total =
+                    (widget.product.productPrice + _toppingsPrice) * _quantity;
+                Navigator.pop(context, total);
               },
             ),
           ],

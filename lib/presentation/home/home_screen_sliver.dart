@@ -25,11 +25,11 @@ class _HomeScreenSliverState extends State<HomeScreenSliver>
   ProductItemsModel? _lastAddedProduct;
   double _cartTotalPrice = 0;
 
-  void _handleOrderAdded(ProductItemsModel product) {
+  void _handleOrderAdded(ProductItemsModel product, double totalPrice) {
     setState(() {
       _cartItemCount++;
       _lastAddedProduct = product;
-      _cartTotalPrice += product.productPrice;
+      _cartTotalPrice += totalPrice;
     });
   }
 

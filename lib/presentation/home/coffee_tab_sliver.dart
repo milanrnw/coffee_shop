@@ -10,7 +10,7 @@ class CoffeeTabSliver extends StatefulWidget {
   const CoffeeTabSliver({super.key, this.controller, this.onOrderAdded});
 
   final ScrollController? controller;
-  final Function(ProductItemsModel)? onOrderAdded;
+  final Function(ProductItemsModel, double)? onOrderAdded;
 
   @override
   State<CoffeeTabSliver> createState() => _CoffeeTabSliverState();
@@ -144,11 +144,11 @@ class _CoffeeTabSliverState extends State<CoffeeTabSliver> {
                       final result = await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ProductScreen(),
+                          builder: (context) => ProductScreen(product: product),
                         ),
                       );
-                      if (result == true && widget.onOrderAdded != null) {
-                        widget.onOrderAdded!(product);
+                      if (result is double && widget.onOrderAdded != null) {
+                        widget.onOrderAdded!(product, result);
                       }
                     },
                     child: ProductTile(

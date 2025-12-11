@@ -50,6 +50,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 setState(() {
                   _selectedValue = 1;
                 });
+                Navigator.pop(context, "GoPay (Rp 85.000)");
               },
               child: Row(
                 children: [
@@ -186,18 +187,30 @@ class _PaymentScreenState extends State<PaymentScreen> {
               ),
             ),
             if (_isTransferExpanded) ...[
-              const BankWidget(
-                  bankName: "Bank BCA",
-                  imagePath: "assets/images/payment/bank_bca.png"),
-              const BankWidget(
-                  bankName: "Bank Mandiri",
-                  imagePath: "assets/images/payment/bank_mandiri.png"),
-              const BankWidget(
-                  bankName: "Bank BNI",
-                  imagePath: "assets/images/payment/bank_bni.png"),
-              const BankWidget(
-                  bankName: "Bank BRI",
-                  imagePath: "assets/images/payment/bank_bri.png"),
+              InkWell(
+                onTap: () => Navigator.pop(context, "Bank BCA"),
+                child: const BankWidget(
+                    bankName: "Bank BCA",
+                    imagePath: "assets/images/payment/bank_bca.png"),
+              ),
+              InkWell(
+                onTap: () => Navigator.pop(context, "Bank Mandiri"),
+                child: const BankWidget(
+                    bankName: "Bank Mandiri",
+                    imagePath: "assets/images/payment/bank_mandiri.png"),
+              ),
+              InkWell(
+                onTap: () => Navigator.pop(context, "Bank BNI"),
+                child: const BankWidget(
+                    bankName: "Bank BNI",
+                    imagePath: "assets/images/payment/bank_bni.png"),
+              ),
+              InkWell(
+                onTap: () => Navigator.pop(context, "Bank BRI"),
+                child: const BankWidget(
+                    bankName: "Bank BRI",
+                    imagePath: "assets/images/payment/bank_bri.png"),
+              ),
             ],
             SizedBox(height: 50.h),
           ],

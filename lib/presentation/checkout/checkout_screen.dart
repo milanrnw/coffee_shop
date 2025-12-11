@@ -1,4 +1,5 @@
 import 'package:coffee_shop/constants/app_strings.dart';
+import 'package:coffee_shop/model/transaction_model.dart';
 import 'package:coffee_shop/model/voucher_model.dart';
 import 'package:coffee_shop/presentation/checkout/checkout_detail.dart';
 import 'package:coffee_shop/presentation/checkout/checkout_bottombar.dart';
@@ -20,6 +21,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   int _quantity = 1;
   final double _unitPrice = 25000;
   VoucherModel? _selectedVoucher;
+  OrderType _selectedOrderType = OrderType.asap;
+  String _scheduledTime = "Schedule Pick Up";
+  String _paymentMethod = "GoPay (Rp 85.000)";
 
   void _updateQuantity(int newQuantity) {
     if (newQuantity < 1) return;
@@ -117,6 +121,24 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               discountAmount: discountAmount,
               total: finalTotal,
               quantity: _quantity,
+              paymentMethod: _paymentMethod,
+              orderType: _selectedOrderType,
+              scheduledTime: _scheduledTime,
+              onPaymentMethodChanged: (value) {
+                setState(() {
+                  _paymentMethod = value;
+                });
+              },
+              onOrderTypeChanged: (value) {
+                setState(() {
+                  _selectedOrderType = value;
+                });
+              },
+              onScheduledTimeChanged: (value) {
+                setState(() {
+                  _scheduledTime = value;
+                });
+              },
             ),
             SizedBox(height: 20.h),
           ],
@@ -125,12 +147,29 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       bottomNavigationBar: CheckoutBottomBar(
         totalPrice: "Rp. ${finalTotal.toStringAsFixed(0)}",
         onCheckoutPressed: () {
+          final transactionData = TransactionModel(
+            transactionId: "TRX${DateTime.now().millisecondsSinceEpoch}",
+            date: "11 Dec 2025",
+            time: "05:30 PM",
+            productName:
+                "Coffee Milk", // Needs to be dynamic, but not passed to CheckoutScreen yet
+            productOptions: "Ice, Regular, Normal Sugar, Normal Ice",
+            quantity: _quantity,
+            price: _unitPrice,
+            voucher: discountAmount,
+            total: finalTotal,
+            paymentMethod: _paymentMethod,
+            schedulePickUpTime:
+                _selectedOrderType == OrderType.asap ? "ASAP" : _scheduledTime,
+          );
+
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const TransactionLoadingScreen(
+                builder: (context) => TransactionLoadingScreen(
                     nextScreen: TransactionSuccessfulScreen(
-                        nextScreen: OrderReceiptScreen()))),
+                        nextScreen:
+                            OrderReceiptScreen(data: transactionData)))),
           );
         },
       ),

@@ -10,8 +10,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class OrderReceiptScreen extends StatefulWidget {
   final String? buttonText;
   final VoidCallback? onButtonTap;
+  final TransactionModel? data;
 
-  const OrderReceiptScreen({super.key, this.buttonText, this.onButtonTap});
+  const OrderReceiptScreen(
+      {super.key, this.buttonText, this.onButtonTap, this.data});
 
   @override
   State<OrderReceiptScreen> createState() => _OrderReceiptScreenState();
@@ -65,19 +67,20 @@ class _OrderReceiptScreenState extends State<OrderReceiptScreen> {
             ),
             SizedBox(height: 20.h),
             TransactionDetailCard(
-              data: TransactionModel(
-                transactionId: "D123456789ABC",
-                date: "10 July’22",
-                time: "04:13 PM",
-                productName: "Coffee Milk",
-                productOptions: "Ice, Regular, Normal Sugar, Normal Ice",
-                quantity: 1,
-                price: 25.000,
-                voucher: 0,
-                total: 25.000,
-                paymentMethod: "Gopay",
-                schedulePickUpTime: "05.15 PM",
-              ),
+              data: widget.data ??
+                  TransactionModel(
+                    transactionId: "D123456789ABC",
+                    date: "10 July’22",
+                    time: "04:13 PM",
+                    productName: "Coffee Milk",
+                    productOptions: "Ice, Regular, Normal Sugar, Normal Ice",
+                    quantity: 1,
+                    price: 25.000,
+                    voucher: 0,
+                    total: 25.000,
+                    paymentMethod: "Gopay",
+                    schedulePickUpTime: "05.15 PM",
+                  ),
             ),
             SizedBox(height: 32.h),
             ElevatedButton(

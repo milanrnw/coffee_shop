@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductScreenToppings extends StatefulWidget {
-  const ProductScreenToppings({super.key});
+  const ProductScreenToppings(
+      {super.key, required this.onToppingsTotalChanged});
+
+  final Function(double) onToppingsTotalChanged;
 
   @override
   State<ProductScreenToppings> createState() => _ProductScreenToppingsState();
@@ -11,13 +14,23 @@ class ProductScreenToppings extends StatefulWidget {
 
 class _ProductScreenToppingsState extends State<ProductScreenToppings> {
   final List<Map<String, dynamic>> toppings = [
-    {"name": "Extra Espresso", "price": "Rp. 5.000"},
-    {"name": "Cincau", "price": "Rp. 6.000"},
-    {"name": "Coffee Jelly", "price": "Rp. 3.000"},
-    {"name": "Chocolate Ice Cream", "price": "Rp. 7.000"},
+    {"name": "Extra Espresso", "price": 5.000},
+    {"name": "Cincau", "price": 6.000},
+    {"name": "Coffee Jelly", "price": 3.000},
+    {"name": "Chocolate Ice Cream", "price": 7.000},
   ];
 
   List<bool> toppingsValues = List.filled(4, false);
+
+  void _updateTotal() {
+    double total = 0;
+    for (int i = 0; i < toppings.length; i++) {
+      if (toppingsValues[i]) {
+        total += toppings[i]['price'];
+      }
+    }
+    widget.onToppingsTotalChanged(total);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +71,7 @@ class _ProductScreenToppingsState extends State<ProductScreenToppings> {
                       ),
                     ),
                     Text(
-                      '+ ${toppings[i]['price']}',
+                      '+ Rp. ${(toppings[i]['price'] as double).toStringAsFixed(3)}',
                       style: TextStyle(
                         fontSize: 14.sp,
                         color: AppColors.textColorHeading,
@@ -70,6 +83,7 @@ class _ProductScreenToppingsState extends State<ProductScreenToppings> {
                       onChanged: (value) {
                         setState(() {
                           toppingsValues[i] = value!;
+                          _updateTotal();
                         });
                       },
                       visualDensity: VisualDensity.compact,
