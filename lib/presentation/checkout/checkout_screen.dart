@@ -151,8 +151,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             transactionId: "TRX${DateTime.now().millisecondsSinceEpoch}",
             date: "11 Dec 2025",
             time: "05:30 PM",
-            productName:
-                "Coffee Milk", // Needs to be dynamic, but not passed to CheckoutScreen yet
+            productName: "Coffee Milk",
             productOptions: "Ice, Regular, Normal Sugar, Normal Ice",
             quantity: _quantity,
             price: _unitPrice,

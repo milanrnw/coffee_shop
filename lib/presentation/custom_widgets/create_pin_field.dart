@@ -3,14 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class CreatePinField extends StatelessWidget {
-  const CreatePinField({super.key, required this.createPinController});
+  const CreatePinField({
+    super.key,
+    required this.createPinController,
+    required this.obscureText,
+  });
 
   final TextEditingController createPinController;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
     return PinCodeTextField(
-      obscureText: true,
+      obscureText: obscureText,
       animationType: AnimationType.fade,
       textInputAction: TextInputAction.done,
       pinTheme: PinTheme(
@@ -36,17 +41,20 @@ class CreatePinField extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         fieldHeight: 36,
         fieldWidth: 30,
-        activeFillColor: Color(0XFF3C3C3C),
+        activeFillColor:
+            obscureText ? const Color(0XFF3C3C3C) : Colors.transparent,
         inactiveFillColor: Colors.transparent,
-        inactiveColor: Color(0XFF868686),
-        activeColor: Color(0XFF868686),
+        inactiveColor: const Color(0XFF868686),
+        activeColor: const Color(0XFF868686),
         selectedFillColor: Colors.transparent,
-        selectedColor: Color(0XFF868686),
+        selectedColor: const Color(0XFF868686),
       ),
       autoFocus: false,
       enableActiveFill: true,
       autoDismissKeyboard: true,
-      textStyle: AppTextStyles.createPinFieldText,
+      textStyle: obscureText
+          ? AppTextStyles.createPinFieldText.copyWith(color: Colors.transparent)
+          : AppTextStyles.createPinFieldText,
       showCursor: false,
       keyboardType: TextInputType.number,
       controller: createPinController,

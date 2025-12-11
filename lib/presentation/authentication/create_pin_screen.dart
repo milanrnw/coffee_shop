@@ -1,3 +1,4 @@
+import 'package:coffee_shop/constants/app_colors.dart';
 import 'package:coffee_shop/constants/app_strings.dart';
 import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:coffee_shop/dashboard/dashboard_screen.dart';
@@ -15,6 +16,22 @@ class CreatePin extends StatefulWidget {
 
 class _CreatePinState extends State<CreatePin> {
   final createPinController = TextEditingController();
+  bool _isPinVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    createPinController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    createPinController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,31 +72,53 @@ class _CreatePinState extends State<CreatePin> {
                       style: AppTextStyles.createPinDescription2,
                     ),
                     SizedBox(height: 24.h),
-                    CreatePinField(createPinController: createPinController),
+                    CreatePinField(
+                      createPinController: createPinController,
+                      obscureText: !_isPinVisible,
+                    ),
                     SizedBox(height: 8.h),
-                    Row(mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: Text(
-                          'show your PIN',
-                          style: TextStyle(
-                            color: Color(0XFF555555),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: Text(
+                            _isPinVisible ? 'hide your PIN' : 'show your PIN',
+                            style: TextStyle(
+                              color: Color(0XFF555555),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
-                      ),
-                      Icon(Icons.remove_red_eye_outlined),
-                    ],
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              _isPinVisible = !_isPinVisible;
+                            });
+                          },
+                          child: Icon(
+                            _isPinVisible
+                                ? Icons.visibility_off_outlined
+                                : Icons.remove_red_eye_outlined,
+                            color: Color(0XFF555555),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 240.h),
                     AuthButton(
                         buttonText: 'Confirm',
+                        buttonColor: createPinController.text.length == 6
+                            ? AppColors.brandColor
+                            : AppColors.textColorDisabled,
                         onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => DashboardScreen()),
-                          );
+                          if (createPinController.text.length == 6) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => DashboardScreen()),
+                            );
+                          }
                         })
                   ],
                 ),
