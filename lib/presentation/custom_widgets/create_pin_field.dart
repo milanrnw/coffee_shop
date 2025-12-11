@@ -7,14 +7,17 @@ class CreatePinField extends StatelessWidget {
     super.key,
     required this.createPinController,
     required this.obscureText,
+    this.onChanged,
   });
 
   final TextEditingController createPinController;
   final bool obscureText;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return PinCodeTextField(
+      onChanged: onChanged ?? (value) {},
       obscureText: obscureText,
       animationType: AnimationType.fade,
       textInputAction: TextInputAction.done,
@@ -50,6 +53,7 @@ class CreatePinField extends StatelessWidget {
         selectedColor: const Color(0XFF868686),
       ),
       autoFocus: false,
+      autoDisposeControllers: false,
       enableActiveFill: true,
       autoDismissKeyboard: true,
       textStyle: obscureText

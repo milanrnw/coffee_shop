@@ -21,9 +21,6 @@ class _CreatePinState extends State<CreatePin> {
   @override
   void initState() {
     super.initState();
-    createPinController.addListener(() {
-      setState(() {});
-    });
   }
 
   @override
@@ -37,10 +34,10 @@ class _CreatePinState extends State<CreatePin> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color(0XFFFEFEFE),
+        backgroundColor: const Color(0XFFFEFEFE),
         leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           iconSize: 24,
         ),
         title: Text(
@@ -48,16 +45,17 @@ class _CreatePinState extends State<CreatePin> {
           style: AppTextStyles.createPinAppBarTitle,
         ),
       ),
-      backgroundColor: Color(0XFFFEFEFE),
+      backgroundColor: const Color(0XFFFEFEFE),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               Divider(
-                color: Color(0XFF3C3C3C).withValues(alpha: 0.15),
+                color: const Color(0XFF3C3C3C).withValues(alpha: 0.15),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
                 child: Column(
                   children: [
                     Image.asset('assets/images/create_pin_image.png'),
@@ -75,6 +73,11 @@ class _CreatePinState extends State<CreatePin> {
                     CreatePinField(
                       createPinController: createPinController,
                       obscureText: !_isPinVisible,
+                      onChanged: (val) {
+                        if (mounted) {
+                          setState(() {});
+                        }
+                      },
                     ),
                     SizedBox(height: 8.h),
                     Row(
@@ -112,12 +115,20 @@ class _CreatePinState extends State<CreatePin> {
                         buttonColor: createPinController.text.length == 6
                             ? AppColors.brandColor
                             : AppColors.textColorDisabled,
-                        onTap: () {
+                        onTap: () async {
                           if (createPinController.text.length == 6) {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => DashboardScreen()),
-                            );
+                            FocusScope.of(context).unfocus();
+                            await Future.delayed(
+                                const Duration(milliseconds: 300));
+                            if (context.mounted) {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const DashboardScreen(),
+                                ),
+                                (route) => false,
+                              );
+                            }
                           }
                         })
                   ],
