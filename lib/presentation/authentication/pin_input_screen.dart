@@ -4,6 +4,7 @@ import 'package:coffee_shop/dashboard/dashboard_screen.dart';
 import 'package:coffee_shop/presentation/custom_widgets/auth_button.dart';
 import 'package:coffee_shop/presentation/custom_widgets/custom_snackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PinInputScreen extends StatefulWidget {
@@ -104,27 +105,37 @@ class _PinInputScreenState extends State<PinInputScreen> {
                             },
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(6, (index) {
-                            return Container(
-                              margin: EdgeInsets.symmetric(horizontal: 8.w),
-                              width: 24.w,
-                              height: 24.h,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
+                        GestureDetector(
+                          onTap: () {
+                            _focusNode.requestFocus();
+                            // Keep keyboard visible
+                            if (MediaQuery.of(context).viewInsets.bottom == 0) {
+                              SystemChannels.textInput
+                                  .invokeMethod('TextInput.show');
+                            }
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(6, (index) {
+                              return Container(
+                                margin: EdgeInsets.symmetric(horizontal: 8.w),
+                                width: 24.w,
+                                height: 24.h,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: _pin.length > index
+                                        ? AppColors.brandColor
+                                        : Colors.grey,
+                                    width: 1.5,
+                                  ),
                                   color: _pin.length > index
                                       ? AppColors.brandColor
-                                      : Colors.grey,
-                                  width: 1.5,
+                                      : Colors.transparent,
                                 ),
-                                color: _pin.length > index
-                                    ? AppColors.brandColor
-                                    : Colors.transparent,
-                              ),
-                            );
-                          }),
+                              );
+                            }),
+                          ),
                         ),
                       ],
                     ),
