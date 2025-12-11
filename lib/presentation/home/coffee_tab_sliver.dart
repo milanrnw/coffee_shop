@@ -7,9 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CoffeeTabSliver extends StatefulWidget {
-  const CoffeeTabSliver({super.key, this.controller});
+  const CoffeeTabSliver({super.key, this.controller, this.onOrderAdded});
 
   final ScrollController? controller;
+  final Function(ProductItemsModel)? onOrderAdded;
 
   @override
   State<CoffeeTabSliver> createState() => _CoffeeTabSliverState();
@@ -139,13 +140,16 @@ class _CoffeeTabSliverState extends State<CoffeeTabSliver> {
 
                 if (index == 0) {
                   return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
+                    onTap: () async {
+                      final result = await Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => ProductScreen(),
                         ),
                       );
+                      if (result == true && widget.onOrderAdded != null) {
+                        widget.onOrderAdded!(product);
+                      }
                     },
                     child: ProductTile(
                       productRatings: product.productRatings,

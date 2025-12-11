@@ -1,4 +1,5 @@
 import 'package:coffee_shop/presentation/authentication/login_screen.dart';
+import 'package:coffee_shop/presentation/authentication/registration_screen.dart';
 import 'package:coffee_shop/presentation/onboarding/onboarding_main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,7 +51,7 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) =>
-              seenOnboarding ? const LoginScreen() : OnboardingMain(),
+              seenOnboarding ? const RegistrationScreen() : OnboardingMain(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },

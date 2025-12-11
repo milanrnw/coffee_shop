@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TotalAmountTile extends StatelessWidget {
-  const TotalAmountTile({super.key});
+  const TotalAmountTile({super.key, this.onAddOrder});
+
+  final VoidCallback? onAddOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +54,12 @@ class TotalAmountTile extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CheckoutScreen()));
+              if (onAddOrder != null) {
+                onAddOrder!();
+              } else {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CheckoutScreen()));
+              }
             },
             child: Container(
               height: 48.h,

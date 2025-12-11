@@ -1,5 +1,6 @@
 import 'package:coffee_shop/model/onboarding_model.dart';
 import 'package:coffee_shop/presentation/authentication/login_screen.dart';
+import 'package:coffee_shop/presentation/authentication/registration_screen.dart';
 import 'package:coffee_shop/presentation/onboarding/onboarding_slide_data.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -57,7 +58,7 @@ class OnboardingMain extends StatelessWidget {
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LoginScreen(),
+                          builder: (context) => RegistrationScreen(),
                         ),
                         (val) => false,
                       );

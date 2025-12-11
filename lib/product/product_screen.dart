@@ -79,7 +79,11 @@ class _ProductScreenState extends State<ProductScreen> {
                 ),
               ),
             ),
-            TotalAmountTile(),
+            TotalAmountTile(
+              onAddOrder: () {
+                Navigator.pop(context, true);
+              },
+            ),
           ],
         ),
       ),
