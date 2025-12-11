@@ -4,6 +4,7 @@ import 'package:coffee_shop/presentation/authentication/registration_screen.dart
 import 'package:coffee_shop/presentation/custom_widgets/auth_button.dart';
 import 'package:coffee_shop/presentation/custom_widgets/auth_screen_footer_text.dart';
 import 'package:coffee_shop/presentation/custom_widgets/common_text_field.dart';
+import 'package:coffee_shop/presentation/custom_widgets/custom_snackbar.dart';
 import 'package:coffee_shop/presentation/custom_widgets/shop_fee_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,11 +46,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   AuthButton(
                       buttonText: 'Login',
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PinInputScreen()),
-                        );
+                        if (numberController.text.isEmpty) {
+                          showCustomSnackbar(
+                              context, "Enter your mobile number first.");
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const PinInputScreen()),
+                          );
+                        }
                       }),
                   SizedBox(height: 268.h),
                   AuthScreenFooterText(

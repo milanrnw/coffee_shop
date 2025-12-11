@@ -145,7 +145,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         ),
       ),
       bottomNavigationBar: CheckoutBottomBar(
-        totalPrice: "Rp. ${finalTotal.toStringAsFixed(0)}",
+        totalPrice: "Rp. ${(finalTotal / 1000).toStringAsFixed(3)}",
         onCheckoutPressed: () {
           final transactionData = TransactionModel(
             transactionId: "TRX${DateTime.now().millisecondsSinceEpoch}",
@@ -154,9 +154,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             productName: "Coffee Milk",
             productOptions: "Ice, Regular, Normal Sugar, Normal Ice",
             quantity: _quantity,
-            price: _unitPrice,
-            voucher: discountAmount,
-            total: finalTotal,
+            price: _unitPrice / 1000,
+            voucher: discountAmount / 1000,
+            total: finalTotal / 1000,
             paymentMethod: _paymentMethod,
             schedulePickUpTime:
                 _selectedOrderType == OrderType.asap ? "ASAP" : _scheduledTime,

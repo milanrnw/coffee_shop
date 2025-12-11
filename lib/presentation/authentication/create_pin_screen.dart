@@ -4,6 +4,7 @@ import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:coffee_shop/dashboard/dashboard_screen.dart';
 import 'package:coffee_shop/presentation/custom_widgets/auth_button.dart';
 import 'package:coffee_shop/presentation/custom_widgets/create_pin_field.dart';
+import 'package:coffee_shop/presentation/custom_widgets/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -112,11 +113,13 @@ class _CreatePinState extends State<CreatePin> {
                     SizedBox(height: 240.h),
                     AuthButton(
                         buttonText: 'Confirm',
-                        buttonColor: createPinController.text.length == 6
-                            ? AppColors.brandColor
-                            : AppColors.textColorDisabled,
+                        buttonColor: AppColors.brandColor,
                         onTap: () async {
-                          if (createPinController.text.length == 6) {
+                          if (createPinController.text.isEmpty ||
+                              createPinController.text.length < 6) {
+                            showCustomSnackbar(
+                                context, "Enter your PIN first.");
+                          } else {
                             FocusScope.of(context).unfocus();
                             await Future.delayed(
                                 const Duration(milliseconds: 300));

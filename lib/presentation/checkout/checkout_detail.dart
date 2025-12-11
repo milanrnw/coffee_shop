@@ -185,7 +185,7 @@ class _CheckoutDetailState extends State<CheckoutDetail> {
                 children: [
                   Text("Price", style: _subtitleStyle),
                   const Spacer(),
-                  Text("Rp${widget.subtotal.toStringAsFixed(0)}",
+                  Text("Rp${(widget.subtotal / 1000).toStringAsFixed(3)}",
                       style: _subtitleStyle),
                 ],
               ),
@@ -198,7 +198,8 @@ class _CheckoutDetailState extends State<CheckoutDetail> {
                   children: [
                     Text("Voucher", style: _subtitleStyle),
                     const Spacer(),
-                    Text("-Rp${widget.discountAmount.toStringAsFixed(0)}",
+                    Text(
+                        "-Rp${(widget.discountAmount / 1000).toStringAsFixed(3)}",
                         style: _subtitleStyle.copyWith(color: Colors.red)),
                   ],
                 ),
@@ -210,7 +211,7 @@ class _CheckoutDetailState extends State<CheckoutDetail> {
                       style: _subtitleStyle.copyWith(
                           fontWeight: FontWeight.bold, color: Colors.black)),
                   const Spacer(),
-                  Text("Rp${widget.total.toStringAsFixed(0)}",
+                  Text("Rp${(widget.total / 1000).toStringAsFixed(3)}",
                       style: _titleStyle),
                 ],
               ),

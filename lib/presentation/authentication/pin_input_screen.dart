@@ -2,6 +2,7 @@ import 'package:coffee_shop/constants/app_colors.dart';
 import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:coffee_shop/dashboard/dashboard_screen.dart';
 import 'package:coffee_shop/presentation/custom_widgets/auth_button.dart';
+import 'package:coffee_shop/presentation/custom_widgets/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -154,10 +155,14 @@ class _PinInputScreenState extends State<PinInputScreen> {
                     SizedBox(height: 32.h),
                     AuthButton(
                       buttonText: "Confirm",
-                      buttonColor: _pin.length == 6
-                          ? AppColors.brandColor
-                          : AppColors.textColorDisabled,
-                      onTap: _pin.length == 6 ? _onConfirm : () {},
+                      buttonColor: AppColors.brandColor,
+                      onTap: () {
+                        if (_pin.length < 6) {
+                          showCustomSnackbar(context, "Enter your PIN first.");
+                        } else {
+                          _onConfirm();
+                        }
+                      },
                     ),
                   ],
                 ),

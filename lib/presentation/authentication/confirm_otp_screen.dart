@@ -3,6 +3,7 @@ import 'package:coffee_shop/constants/app_strings.dart';
 import 'package:coffee_shop/constants/app_text_styles.dart';
 import 'package:coffee_shop/presentation/authentication/create_pin_screen.dart';
 import 'package:coffee_shop/presentation/authentication/otp_loading_screen.dart';
+import 'package:coffee_shop/presentation/custom_widgets/custom_snackbar.dart';
 import 'package:coffee_shop/presentation/custom_widgets/otp_textfield.dart';
 import 'package:coffee_shop/presentation/custom_widgets/auth_button.dart';
 import 'package:coffee_shop/presentation/custom_widgets/auth_screen_footer_text.dart';
@@ -21,7 +22,6 @@ class _ConfirmOtpScreenState extends State<ConfirmOtpScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 40,
@@ -82,7 +82,14 @@ class _ConfirmOtpScreenState extends State<ConfirmOtpScreen> {
                   AuthButton(
                     buttonText: 'Confirm',
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => OtpLoadingScreen(nextScreen: CreatePin())));
+                      if (otpController.text.isEmpty) {
+                        showCustomSnackbar(
+                            context, "Enter your OTP Code first");
+                      } else {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                OtpLoadingScreen(nextScreen: CreatePin())));
+                      }
                     },
                   ),
                 ],
