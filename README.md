@@ -165,9 +165,3 @@ Contributions are welcome! If you see an opportunity to improve the code or add 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-<p align="center">
-  Built with ❤️ by [Milan Vanik]
-</p>

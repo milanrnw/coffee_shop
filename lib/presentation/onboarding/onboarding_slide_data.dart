@@ -37,39 +37,30 @@ class _OnboardingSlideDataState extends State<OnboardingSlideData> {
           width: 284.w,
           height: 261.h,
         ),
-
         SizedBox(height: 63.h),
-        Text(
-          widget.onboardingData.labeltext,
-          style: AppTextStyles.onboardingSlideLabel
-        ),
-
+        Text(widget.onboardingData.labeltext,
+            style: AppTextStyles.onboardingSlideLabel),
         SizedBox(height: 16.h),
-        Text(
-          widget.onboardingData.descriptiontext,
-          style: AppTextStyles.onboardingSlideDescription
-        ),
-
+        Text(widget.onboardingData.descriptiontext,
+            style: AppTextStyles.onboardingSlideDescription),
         Flexible(
-        child: SizedBox.expand(),
+          child: SizedBox.expand(),
         ),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             AnimatedSmoothIndicator(
-            activeIndex: widget.currentindex,
-            count: widget.slidelength,
-            effect: ExpandingDotsEffect(
-              activeDotColor: Color(0XFF5D4037),
-              dotHeight: 12.h,
-              dotWidth: 12.h,
-              expansionFactor: 2,
-            ),
+              activeIndex: widget.currentindex,
+              count: widget.slidelength,
+              effect: ExpandingDotsEffect(
+                activeDotColor: Color(0XFF5D4037),
+                dotHeight: 12.h,
+                dotWidth: 12.h,
+                expansionFactor: 2,
+              ),
             ),
             GestureDetector(
               onTap: () => widget.ontapbutton(),
-              
               child: Container(
                 width: 156.w,
                 padding: EdgeInsets.symmetric(
@@ -88,12 +79,11 @@ class _OnboardingSlideDataState extends State<OnboardingSlideData> {
                       widget.onboardingData.buttontext,
                       style: TextStyle(
                         color: Color(0XFFFEFEFE),
-                        fontSize: 14.h,
+                        fontSize: 14.sp,
                       ),
                     ),
                     Icon(Icons.arrow_forward,
-                    color: Color(0XFFFEFEFE),
-                    size: 16.r),
+                        color: Color(0XFFFEFEFE), size: 16.r),
                   ],
                 ),
               ),
